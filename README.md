@@ -1,2 +1,2 @@
 # codbex-phoebe
-Monitoring Platform
+Analytics Platform
