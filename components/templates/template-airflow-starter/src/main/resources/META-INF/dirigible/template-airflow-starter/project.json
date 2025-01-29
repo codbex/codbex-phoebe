@@ -1,0 +1,15 @@
+{
+  "guid": "{{projectName}}",
+  "actions": [
+    {
+      "name": "Copy Apache Airflow files",
+      "commands": [
+        {
+          "os": "linux",
+          "command": "sh build-linux.sh"
+        }
+      ],
+      "publish": "true"
+    }
+  ]
+}

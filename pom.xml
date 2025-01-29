@@ -55,6 +55,7 @@
         <module>application</module>
         <module>branding</module>
         <module>welcome</module>
+        <module>components</module>
     </modules>
 
     <properties>
@@ -168,6 +169,16 @@
             <dependency>
                 <groupId>com.codbex.airflow</groupId>
                 <artifactId>codbex-airflow-welcome</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.codbex.airflow</groupId>
+                <artifactId>codbex-airflow-components-template-airflow-starter</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.codbex.airflow</groupId>
+                <artifactId>codbex-airflow-components-ide-ui-airflow</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>

@@ -80,10 +80,10 @@
 			<groupId>org.eclipse.dirigible</groupId>
 			<artifactId>dirigible-components-engine-template-javascript</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.eclipse.dirigible</groupId>
-			<artifactId>dirigible-components-engine-jobs</artifactId>
-		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>org.eclipse.dirigible</groupId>-->
+<!--			<artifactId>dirigible-components-engine-jobs</artifactId>-->
+<!--		</dependency>-->
 		<dependency>
 			<groupId>org.eclipse.dirigible</groupId>
 			<artifactId>dirigible-components-engine-listeners</artifactId>
@@ -139,6 +139,10 @@
 
 		<!-- IDE UI -->
 		<dependency>
+			<groupId>com.codbex.airflow</groupId>
+			<artifactId>codbex-airflow-components-ide-ui-airflow</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>org.eclipse.dirigible</groupId>
 			<artifactId>dirigible-components-ide-ui-about</artifactId>
 		</dependency>
@@ -154,10 +158,10 @@
 			<groupId>org.eclipse.dirigible</groupId>
 			<artifactId>dirigible-components-ide-ui-csvim</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.eclipse.dirigible</groupId>
-			<artifactId>dirigible-components-ide-ui-debugger</artifactId>
-		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>org.eclipse.dirigible</groupId>-->
+<!--			<artifactId>dirigible-components-ide-ui-debugger</artifactId>-->
+<!--		</dependency>-->
 		<dependency>
 			<groupId>org.eclipse.dirigible</groupId>
 			<artifactId>dirigible-components-ide-ui-generate-service</artifactId>
@@ -322,14 +326,14 @@
 			<groupId>org.eclipse.dirigible</groupId>
 			<artifactId>dirigible-components-ide-ui-extensions-menu</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.eclipse.dirigible</groupId>
-			<artifactId>dirigible-components-ide-ui-jobs</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.dirigible</groupId>
-			<artifactId>dirigible-components-ide-ui-jobs-menu</artifactId>
-		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>org.eclipse.dirigible</groupId>-->
+<!--			<artifactId>dirigible-components-ide-ui-jobs</artifactId>-->
+<!--		</dependency>-->
+<!--		<dependency>-->
+<!--			<groupId>org.eclipse.dirigible</groupId>-->
+<!--			<artifactId>dirigible-components-ide-ui-jobs-menu</artifactId>-->
+<!--		</dependency>-->
 		<dependency>
 			<groupId>org.eclipse.dirigible</groupId>
 			<artifactId>dirigible-components-ide-ui-listeners</artifactId>
@@ -338,10 +342,10 @@
 			<groupId>org.eclipse.dirigible</groupId>
 			<artifactId>dirigible-components-ide-ui-listeners-menu</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.eclipse.dirigible</groupId>
-			<artifactId>dirigible-components-ide-ui-operations</artifactId>
-		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>org.eclipse.dirigible</groupId>-->
+<!--			<artifactId>dirigible-components-ide-ui-operations</artifactId>-->
+<!--		</dependency>-->
 		<dependency>
 			<groupId>org.eclipse.dirigible</groupId>
 			<artifactId>dirigible-components-ide-ui-terminal</artifactId>
@@ -349,41 +353,45 @@
 
 		<!-- Templates -->
 		<dependency>
-			<groupId>org.eclipse.dirigible</groupId>
-			<artifactId>dirigible-components-template-database-access</artifactId>
+			<groupId>com.codbex.airflow</groupId>
+			<artifactId>codbex-airflow-components-template-airflow-starter</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.eclipse.dirigible</groupId>
-			<artifactId>dirigible-components-template-database-table</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.dirigible</groupId>
-			<artifactId>dirigible-components-template-database-view</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.dirigible</groupId>
-			<artifactId>dirigible-components-template-hello-world</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.dirigible</groupId>
-			<artifactId>dirigible-components-template-html</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.dirigible</groupId>
-			<artifactId>dirigible-components-template-http-client</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.dirigible</groupId>
-			<artifactId>dirigible-components-template-job</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.dirigible</groupId>
-			<artifactId>dirigible-components-template-listener</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.dirigible</groupId>
-			<artifactId>dirigible-components-template-websocket</artifactId>
-		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>org.eclipse.dirigible</groupId>-->
+<!--			<artifactId>dirigible-components-template-database-access</artifactId>-->
+<!--		</dependency>-->
+<!--		<dependency>-->
+<!--			<groupId>org.eclipse.dirigible</groupId>-->
+<!--			<artifactId>dirigible-components-template-database-table</artifactId>-->
+<!--		</dependency>-->
+<!--		<dependency>-->
+<!--			<groupId>org.eclipse.dirigible</groupId>-->
+<!--			<artifactId>dirigible-components-template-database-view</artifactId>-->
+<!--		</dependency>-->
+<!--		<dependency>-->
+<!--			<groupId>org.eclipse.dirigible</groupId>-->
+<!--			<artifactId>dirigible-components-template-hello-world</artifactId>-->
+<!--		</dependency>-->
+<!--		<dependency>-->
+<!--			<groupId>org.eclipse.dirigible</groupId>-->
+<!--			<artifactId>dirigible-components-template-html</artifactId>-->
+<!--		</dependency>-->
+<!--		<dependency>-->
+<!--			<groupId>org.eclipse.dirigible</groupId>-->
+<!--			<artifactId>dirigible-components-template-http-client</artifactId>-->
+<!--		</dependency>-->
+<!--		<dependency>-->
+<!--			<groupId>org.eclipse.dirigible</groupId>-->
+<!--			<artifactId>dirigible-components-template-job</artifactId>-->
+<!--		</dependency>-->
+<!--		<dependency>-->
+<!--			<groupId>org.eclipse.dirigible</groupId>-->
+<!--			<artifactId>dirigible-components-template-listener</artifactId>-->
+<!--		</dependency>-->
+<!--		<dependency>-->
+<!--			<groupId>org.eclipse.dirigible</groupId>-->
+<!--			<artifactId>dirigible-components-template-websocket</artifactId>-->
+<!--		</dependency>-->
 
 		<!-- Tests -->
 		<dependency>
