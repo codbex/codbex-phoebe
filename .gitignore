@@ -27,3 +27,4 @@ dist/
 *.jar
 *.log
 derby.log
+**/build
