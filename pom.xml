@@ -5,7 +5,7 @@
     <parent>
         <groupId>com.codbex.platform</groupId>
         <artifactId>codbex-platform-parent</artifactId>
-        <version>1.0.51</version>
+        <version>1.0.52</version>
     </parent>
 
     <name>codbex - airflow - parent</name>
@@ -54,7 +54,6 @@
 
     <properties>
         <project.title>codbex airflow</project.title>
-        <dirigible.version>11.0.0-SNAPSHOT</dirigible.version>
     </properties>
 
     <modules>
