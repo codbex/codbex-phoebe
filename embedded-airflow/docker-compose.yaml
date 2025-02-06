@@ -6,10 +6,10 @@ services:
       - POSTGRES_USER=${POSTGRES_USER:-airflow_user}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-airflow_password}
       - POSTGRES_DB=${POSTGRES_DB:-airflow_db}
-#    volumes:
-#      - ${POSTGRES_DATA_DIR:-./postgresql_data}:/var/lib/postgresql/data
+    #    volumes:
+    #      - ${POSTGRES_DATA_DIR:-./postgresql_data}:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD", "pg_isready", "-U", "airflow"]
+      test: [ "CMD", "pg_isready", "-U", "airflow" ]
       interval: 10s
       retries: 5
       start_period: 5s
@@ -20,7 +20,7 @@ services:
   codbex-airflow:
     image: codbex-airflow:dev
     container_name: codbex-airflow
-#    command: "airflow standalone"
+    #    command: "airflow standalone"
     environment:
       - AIRFLOW__CORE__EXECUTOR=LocalExecutor
       - AIRFLOW__CORE__SQL_ALCHEMY_CONN=postgresql+psycopg2://${POSTGRES_USER:-airflow_user}:${POSTGRES_PASSWORD:-airflow_password}@postgres/${POSTGRES_DB:-airflow_db}
@@ -31,14 +31,13 @@ services:
       - _AIRFLOW_WWW_USER_USERNAME=${AIRFLOW_USER_USERNAME:-airflow}
       - _AIRFLOW_WWW_USER_PASSWORD=${AIRFLOW_USER_PASSWORD:-airflow}
       - AIRFLOW__SCHEDULER__DAG_DIR_LIST_INTERVAL=5
-#    user: "${AIRFLOW_UID:-50000}:0"
-#    volumes:
-#      - ${AIRFLOW_PROJ_DIR:-.}/dags:/opt/airflow/dags
-#      - ${AIRFLOW_PROJ_DIR:-.}/logs:/opt/airflow/logs
-#      - ${AIRFLOW_PROJ_DIR:-.}/config:/opt/airflow/config
-#      - ${AIRFLOW_PROJ_DIR:-.}/plugins:/opt/airflow/plugins
+    #    user: "${AIRFLOW_UID:-50000}:0"
+    #    volumes:
+    #      - ${AIRFLOW_PROJ_DIR:-.}/dags:/opt/airflow/dags
+    #      - ${AIRFLOW_PROJ_DIR:-.}/logs:/opt/airflow/logs
+    #      - ${AIRFLOW_PROJ_DIR:-.}/config:/opt/airflow/config
+    #      - ${AIRFLOW_PROJ_DIR:-.}/plugins:/opt/airflow/plugins
     ports:
-      - "8080:8080"
       - "80:80"
     depends_on:
       - postgres

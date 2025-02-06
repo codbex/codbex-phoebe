@@ -34,8 +34,8 @@ USER airflow
 # Copy your Spring Boot application JAR into the container
 COPY application/target/*.jar /opt/airflow/codbex/application.jar
 
-# Expose 80 for the Java app and 8080 for Airflow
-EXPOSE 80 8080
+# Expose 80 for the Java app only
+EXPOSE 80
 
 COPY embedded-airflow/start.sh /opt/airflow/codbex/start.sh
 
