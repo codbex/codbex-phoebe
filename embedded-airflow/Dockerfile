@@ -41,4 +41,15 @@ COPY embedded-airflow/start.sh /opt/airflow/codbex/start.sh
 
 COPY embedded-airflow/webserver_config.py /opt/airflow
 
+# Phoebe env variables
+ENV AIRFLOW_POSTGRES_USER="postgres"
+ENV AIRFLOW_POSTGRES_PASS="postgres"
+ENV AIRFLOW_POSTGRES_HOST="postgres"
+ENV AIRFLOW_POSTGRES_DB="postgres"
+
+ENV AIRFLOW__CORE__EXECUTOR="LocalExecutor"
+ENV AIRFLOW__CORE__LOAD_EXAMPLES="False"
+ENV _AIRFLOW_DB_MIGRATE="true"
+ENV AIRFLOW__SCHEDULER__DAG_DIR_LIST_INTERVAL="5"
+
 ENTRYPOINT ["/opt/airflow/codbex/start.sh"]

@@ -3,6 +3,10 @@
 # Start Airflow in the background
 echo "Current user: $(whoami)"
 
+# construct airflow connection string
+export AIRFLOW__CORE__SQL_ALCHEMY_CONN="postgresql+psycopg2://${AIRFLOW_POSTGRES_USER}:${AIRFLOW_POSTGRES_PASS}@${AIRFLOW_POSTGRES_HOST}/${AIRFLOW_POSTGRES_DB}"
+echo AIRFLOW__CORE__SQL_ALCHEMY_CONN: $AIRFLOW__CORE__SQL_ALCHEMY_CONN
+
 echo "Starting Airflow..."
 /usr/bin/dumb-init -- /entrypoint standalone &
 

@@ -1,11 +1,12 @@
 services:
   postgres:
-    image: postgres:13
+    image: postgres:${POSTGRES_IMAGE_TAG-13}
     container_name: postgres
+    hostname: ${AIRFLOW_POSTGRES_HOST:-postgres}
     environment:
-      - POSTGRES_USER=${POSTGRES_USER:-airflow_user}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-airflow_password}
-      - POSTGRES_DB=${POSTGRES_DB:-airflow_db}
+      - POSTGRES_USER=${AIRFLOW_POSTGRES_USER:-postgres}
+      - POSTGRES_PASSWORD=${AIRFLOW_POSTGRES_PASS:-postgres}
+      - POSTGRES_DB=${AIRFLOW_POSTGRES_DB:-postgres}
 #    volumes:
 #      - ${POSTGRES_DATA_DIR:-./postgresql_data}:/var/lib/postgresql/data
     healthcheck:
@@ -20,20 +21,11 @@ services:
   codbex-airflow:
     image: codbex-airflow:dev
     container_name: codbex-airflow
-#    command: "airflow standalone"
     environment:
-      - AIRFLOW__CORE__EXECUTOR=LocalExecutor
-      - AIRFLOW__CORE__SQL_ALCHEMY_CONN=postgresql+psycopg2://${POSTGRES_USER:-airflow_user}:${POSTGRES_PASSWORD:-airflow_password}@postgres/${POSTGRES_DB:-airflow_db}
-      - AIRFLOW__CORE__LOAD_EXAMPLES=False
-      - _AIRFLOW_DB_MIGRATE=true
-#     set interval for DAGs scan
-      - AIRFLOW__SCHEDULER__DAG_DIR_LIST_INTERVAL=5
-#    user: "${AIRFLOW_UID:-50000}:0"
-#    volumes:
-#      - ${AIRFLOW_PROJ_DIR:-.}/dags:/opt/airflow/dags
-#      - ${AIRFLOW_PROJ_DIR:-.}/logs:/opt/airflow/logs
-#      - ${AIRFLOW_PROJ_DIR:-.}/config:/opt/airflow/config
-#      - ${AIRFLOW_PROJ_DIR:-.}/plugins:/opt/airflow/plugins
+      - AIRFLOW_POSTGRES_USER=${AIRFLOW_POSTGRES_USER:-postgres}
+      - AIRFLOW_POSTGRES_PASS=${AIRFLOW_POSTGRES_PASS:-postgres}
+      - AIRFLOW_POSTGRES_HOST=postgres
+      - AIRFLOW_POSTGRES_DB=${AIRFLOW_POSTGRES_DB:-postgres}
     ports:
       - "80:80"
     depends_on:
