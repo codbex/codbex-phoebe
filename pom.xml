@@ -54,6 +54,7 @@
 
     <properties>
         <project.title>codbex airflow</project.title>
+        <dirigible.version>11.0.0-SNAPSHOT</dirigible.version>
     </properties>
 
     <modules>

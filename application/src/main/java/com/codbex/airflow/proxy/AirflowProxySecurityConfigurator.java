@@ -13,7 +13,7 @@ class AirflowProxySecurityConfigurator implements CustomSecurityConfigurator {
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests((authz) -> //
-                authz.requestMatchers(DEVELOPER_PATTERNS)
-                     .hasRole(Roles.DEVELOPER.getRoleName()));
+        authz.requestMatchers(DEVELOPER_PATTERNS)
+             .hasRole(Roles.DEVELOPER.getRoleName()));
     }
 }

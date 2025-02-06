@@ -39,4 +39,6 @@ EXPOSE 80
 
 COPY embedded-airflow/start.sh /opt/airflow/codbex/start.sh
 
+COPY embedded-airflow/webserver_config.py /opt/airflow
+
 ENTRYPOINT ["/opt/airflow/codbex/start.sh"]
