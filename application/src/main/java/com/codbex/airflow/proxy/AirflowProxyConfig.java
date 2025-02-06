@@ -1,6 +1,6 @@
 package com.codbex.airflow.proxy;
 
-import org.springframework.beans.factory.annotation.Value;
+import com.codbex.airflow.cfg.AppConfig;
 import org.springframework.cloud.gateway.server.mvc.filter.AfterFilterFunctions;
 import org.springframework.cloud.gateway.server.mvc.filter.BeforeFilterFunctions;
 import org.springframework.cloud.gateway.server.mvc.handler.GatewayRouterFunctions;
@@ -29,9 +29,8 @@ public class AirflowProxyConfig {
     private final RelativeLocationHeaderRewriter relativeLocationHeaderRewriter;
     private final TextResponseBodyRewriter textResponseBodyRewriter;
 
-    AirflowProxyConfig(@Value("${airflow.url}") String airflowUrl, RelativeLocationHeaderRewriter relativeLocationHeaderRewriter,
-            TextResponseBodyRewriter textResponseBodyRewriter) {
-        this.airflowUrl = airflowUrl;
+    AirflowProxyConfig(RelativeLocationHeaderRewriter relativeLocationHeaderRewriter, TextResponseBodyRewriter textResponseBodyRewriter) {
+        this.airflowUrl = AppConfig.AIRFLOW_URL.getStringValue();
         this.relativeLocationHeaderRewriter = relativeLocationHeaderRewriter;
         this.textResponseBodyRewriter = textResponseBodyRewriter;
     }

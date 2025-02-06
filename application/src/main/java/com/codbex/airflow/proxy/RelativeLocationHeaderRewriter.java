@@ -1,8 +1,8 @@
 package com.codbex.airflow.proxy;
 
+import com.codbex.airflow.cfg.AppConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.function.ServerRequest;
@@ -18,8 +18,8 @@ class RelativeLocationHeaderRewriter {
 
     private final String airflowUrl;
 
-    RelativeLocationHeaderRewriter(@Value("${airflow.url}") String airflowUrl) {
-        this.airflowUrl = airflowUrl;
+    RelativeLocationHeaderRewriter() {
+        this.airflowUrl = AppConfig.AIRFLOW_URL.getStringValue();
     }
 
     ServerResponse rewriteRelativeLocationHeader(ServerRequest request, ServerResponse response) {

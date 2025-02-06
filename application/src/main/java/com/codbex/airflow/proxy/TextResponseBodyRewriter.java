@@ -1,8 +1,8 @@
 package com.codbex.airflow.proxy;
 
+import com.codbex.airflow.cfg.AppConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.gateway.server.mvc.filter.BodyFilterFunctions;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -31,8 +31,8 @@ class TextResponseBodyRewriter implements BodyFilterFunctions.RewriteResponseFun
 
     private final String airflowUrl;
 
-    TextResponseBodyRewriter(@Value("${airflow.url}") String airflowUrl) {
-        this.airflowUrl = airflowUrl;
+    TextResponseBodyRewriter() {
+        this.airflowUrl = AppConfig.AIRFLOW_URL.getStringValue();
     }
 
     @Override
