@@ -6,7 +6,6 @@ import org.springframework.cloud.gateway.server.mvc.filter.BeforeFilterFunctions
 import org.springframework.cloud.gateway.server.mvc.handler.GatewayRouterFunctions;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpHeaders;
 import org.springframework.web.servlet.function.RouterFunction;
 import org.springframework.web.servlet.function.ServerResponse;
 
@@ -49,7 +48,6 @@ public class AirflowProxyConfig {
                                      .OPTIONS(path(AirflowProxyConfig.BASE_PATH_PATTERN), http(airflowUrl))
 
                                      .before(BeforeFilterFunctions.rewritePath(AirflowProxyConfig.ABSOLUTE_BASE_PATH + "(.*)", "$1"))
-                                     .before(BeforeFilterFunctions.addRequestHeader(HttpHeaders.AUTHORIZATION, "Basic YWRtaW46YWRtaW4="))
 
                                      .after(AfterFilterFunctions.rewriteLocationResponseHeader(
                                              cfg -> cfg.setProtocolsRegex("https?|ftps?|http?")))
