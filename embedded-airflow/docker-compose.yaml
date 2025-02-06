@@ -24,7 +24,7 @@ services:
     environment:
       - AIRFLOW_POSTGRES_USER=${AIRFLOW_POSTGRES_USER:-postgres}
       - AIRFLOW_POSTGRES_PASS=${AIRFLOW_POSTGRES_PASS:-postgres}
-      - AIRFLOW_POSTGRES_HOST=postgres
+      - AIRFLOW_POSTGRES_HOST=${AIRFLOW_POSTGRES_HOST:-postgres}
       - AIRFLOW_POSTGRES_DB=${AIRFLOW_POSTGRES_DB:-postgres}
     ports:
       - "80:80"
