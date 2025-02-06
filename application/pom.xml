@@ -16,6 +16,12 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-gateway-mvc</artifactId>
+            <version>4.2.0</version>
+        </dependency>
+        
+        <dependency>
             <groupId>com.codbex.airflow</groupId>
             <artifactId>codbex-airflow-branding</artifactId>
         </dependency>

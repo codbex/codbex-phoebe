@@ -20,7 +20,7 @@ public class AirflowProxyConfig {
 
     static final String RELATIVE_BASE_PATH = "services/airflow";
     static final String ABSOLUTE_BASE_PATH = "/" + RELATIVE_BASE_PATH;
-    public static final String BASE_PATH_PATTERN = ABSOLUTE_BASE_PATH + "/**";
+    static final String BASE_PATH_PATTERN = ABSOLUTE_BASE_PATH + "/**";
 
     private static final String EXCEPT_STARTS_WITH_BASE_PATH = "(?!" + RELATIVE_BASE_PATH + "/)";
     private static final Pattern REPLACE_PATTERN =
@@ -49,7 +49,7 @@ public class AirflowProxyConfig {
                                      .OPTIONS(path(AirflowProxyConfig.BASE_PATH_PATTERN), http(airflowUrl))
 
                                      .before(BeforeFilterFunctions.rewritePath(AirflowProxyConfig.ABSOLUTE_BASE_PATH + "(.*)", "$1"))
-                                     .before(BeforeFilterFunctions.addRequestHeader(HttpHeaders.AUTHORIZATION, "Basic: YWRtaW46YWRtaW4="))
+                                     .before(BeforeFilterFunctions.addRequestHeader(HttpHeaders.AUTHORIZATION, "Basic YWRtaW46YWRtaW4="))
 
                                      .after(AfterFilterFunctions.rewriteLocationResponseHeader(
                                              cfg -> cfg.setProtocolsRegex("https?|ftps?|http?")))
