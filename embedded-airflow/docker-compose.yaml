@@ -28,16 +28,6 @@ services:
       - _AIRFLOW_DB_MIGRATE=true
 #     set interval for DAGs scan
       - AIRFLOW__SCHEDULER__DAG_DIR_LIST_INTERVAL=5
-#     disable authentication and authorization
-#      - AIRFLOW__API__AUTH_BACKENDS=airflow.api.auth.backend.default
-#      - AIRFLOW__API__AUTH_BACKENDS=airflow.api.auth.backend.basic_auth,airflow.api.auth.backend.session
-#      - _AIRFLOW_WWW_USER_CREATE=true
-#      - _AIRFLOW_WWW_USER_USERNAME=${AIRFLOW_USER_USERNAME:-airflow}
-#      - _AIRFLOW_WWW_USER_PASSWORD=${AIRFLOW_USER_PASSWORD:-airflow}
-#      - AUTH_ROLE_PUBLIC=Admin
-#      - AIRFLOW__WEBSERVER__AUTHENTICATE=False
-#      - AIRFLOW__WEBSERVER__AUTHORIZE=False
-#      - AIRFLOW__WEBSERVER__RBAC=False
 #    user: "${AIRFLOW_UID:-50000}:0"
 #    volumes:
 #      - ${AIRFLOW_PROJ_DIR:-.}/dags:/opt/airflow/dags
