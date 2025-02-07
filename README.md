@@ -36,7 +36,6 @@ It also helps you to easily start your work using the defined Apache Airflow sta
 
 ```shell
 export GIT_REPO_FOLDER='<set-your-path>'
-export GIT_REPO_FOLDER='/Users/iliyan/work/git/codbex-airflow'
 
 cd $GIT_REPO_FOLDER
 
@@ -49,7 +48,6 @@ __Prerequisites:__ [Build the project jar](#build-the-project-jar)
 
   ```shell
   export GIT_REPO_FOLDER='<set-your-path>'
-  export GIT_REPO_FOLDER='/Users/iliyan/work/git/codbex-airflow'
 
   cd "$GIT_REPO_FOLDER/application"
   
@@ -86,7 +84,6 @@ docker run --name postgres \
 
 ```shell
 export PHOEBE_IMAGE='ghcr.io/cdobex/codbex-phoebe:latest'
-export PHOEBE_IMAGE='ghcr.io/iliyan-velichkov/codbex-phoebe:dev'
 
 docker rm -f phoebe
 
@@ -138,7 +135,6 @@ docker run --name phoebe  \
 - Start the application
     ```shell
     export GIT_REPO_FOLDER='<set-your-path>'
-    export GIT_REPO_FOLDER='/Users/iliyan/work/git/codbex-airflow'
   
     export PHOEBE_AIRFLOW_WORK_DIR="$AIRFLOW_WORK_DIR"
     java \
@@ -151,7 +147,6 @@ docker run --name phoebe  \
 - Start the application **in debug** with debug port `8000`
     ```shell
     export GIT_REPO_FOLDER='<set-your-path>'
-    export GIT_REPO_FOLDER='/Users/iliyan/work/git/codbex-airflow'
   
     export PHOEBE_AIRFLOW_WORK_DIR="$AIRFLOW_WORK_DIR"
     java \
@@ -173,10 +168,8 @@ __Prerequisites:__ [Build the project jar](#build-the-project-jar)
 
 ```shell
 export GIT_REPO_FOLDER='<set-your-path>'
-export GIT_REPO_FOLDER='/Users/iliyan/work/git/codbex-airflow'
 export IMAGE='codbex-phoebe:dev'
 export GITHUB_USERNAME='<your-github-user>'
-export GITHUB_USERNAME='iliyan-velichkov'
 
 cd "$GIT_REPO_FOLDER/application"
 
