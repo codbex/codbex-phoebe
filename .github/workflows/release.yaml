@@ -54,7 +54,7 @@ jobs:
           #### Start Docker image
           
           ```shell
-          export PHOEBE_IMAGE='ghcr.io/cdobex/codbex-phoebe:${{ inputs.release-version }}'
+          export PHOEBE_IMAGE='ghcr.io/codbex/codbex-phoebe:${{ inputs.release-version }}'
           
           docker rm -f phoebe
           

@@ -3,26 +3,24 @@
 Web IDE for [Apache Airflow](https://airflow.apache.org/) workflows development.
 
 <!-- TOC -->
-
 * [codbex-phoebe](#codbex-phoebe)
-    * [Description](#description)
-    * [Run steps](#run-steps)
-        * [Start using Docker and released image](#start-using-docker-and-released-image)
-            * [Start PostgreSQL](#start-postgresql)
-            * [Start Docker image](#start-docker-image)
-        * [Build the project jar](#build-the-project-jar)
-        * [Start using Docker Compose and local sources](#start-using-docker-compose-and-local-sources)
-        * [Java standalone application](#java-standalone-application)
-            * [Prerequisites](#prerequisites)
-            * [Start the application](#start-the-application)
-        * [Multi-platform Docker build](#multi-platform-docker-build)
-        * [Run unit tests](#run-unit-tests)
-        * [Run integration tests](#run-integration-tests)
-        * [Run all tests](#run-all-tests)
-        * [Format the code](#format-the-code)
-    * [Configurations](#configurations)
-    * [Access the application](#access-the-application)
-
+  * [Description](#description)
+  * [Run steps](#run-steps)
+    * [Start using Docker and released image](#start-using-docker-and-released-image)
+      * [Start PostgreSQL](#start-postgresql)
+      * [Start Docker image](#start-docker-image)
+    * [Build the project jar](#build-the-project-jar)
+    * [Start using Docker Compose and local sources](#start-using-docker-compose-and-local-sources)
+    * [Java standalone application](#java-standalone-application)
+      * [Prerequisites](#prerequisites)
+      * [Start the application](#start-the-application)
+    * [Multi-platform Docker build](#multi-platform-docker-build)
+    * [Run unit tests](#run-unit-tests)
+    * [Run integration tests](#run-integration-tests)
+    * [Run all tests](#run-all-tests)
+    * [Format the code](#format-the-code)
+  * [Configurations](#configurations)
+  * [Access the application](#access-the-application)
 <!-- TOC -->
 
 ## Description
@@ -71,7 +69,7 @@ docker run --name postgres \
 #### Start Docker image
 
 ```shell
-export PHOEBE_IMAGE='ghcr.io/cdobex/codbex-phoebe:latest'
+export PHOEBE_IMAGE='ghcr.io/codbex/codbex-phoebe:latest'
 
 docker rm -f phoebe
 
@@ -127,6 +125,9 @@ __Prerequisites:__ [Build the project jar](#build-the-project-jar)
 
 - Start Airflow locally
     ```shell
+    export GIT_REPO_FOLDER='<set-your-path>'
+    cd "$GIT_REPO_FOLDER"
+  
     export AIRFLOW_WORK_DIR="$HOME/airflow_work"
     export PHOEBE_AIRFLOW_POSTGRES_USER="postgres"
     export PHOEBE_AIRFLOW_POSTGRES_PASS="postgres"
@@ -156,6 +157,7 @@ __Prerequisites:__ [Build the project jar](#build-the-project-jar)
 - Start the application
     ```shell
     export GIT_REPO_FOLDER='<set-your-path>'
+    cd "$GIT_REPO_FOLDER"
   
     export PHOEBE_AIRFLOW_WORK_DIR="$AIRFLOW_WORK_DIR"
     java \
@@ -168,6 +170,7 @@ __Prerequisites:__ [Build the project jar](#build-the-project-jar)
 - Start the application **in debug** with debug port `8000`
     ```shell
     export GIT_REPO_FOLDER='<set-your-path>'
+    cd "$GIT_REPO_FOLDER"
   
     export PHOEBE_AIRFLOW_WORK_DIR="$AIRFLOW_WORK_DIR"
     java \
