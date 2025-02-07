@@ -1,4 +1,4 @@
-name: Release - Platform
+name: Release
 
 on:
   workflow_dispatch:
@@ -26,7 +26,7 @@ jobs:
       release-content: |
         ## codbex-phoebe - ${{ inputs.release-version }}
         
-        Integration Platform
+        Apache Airflow Web IDE
         
         ## Deployment
         
@@ -38,5 +38,5 @@ jobs:
         
         ## Access points:
         
-        - [/services/web/ide/](http://localhost/services/web/ide/) - Web IDE
+        - [http://localhost:80](http://localhost:80) - Web IDE
     secrets: inherit
