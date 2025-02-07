@@ -26,6 +26,10 @@ It also helps you to easily start your work using the defined Apache Airflow sta
             * [Prerequisites](#prerequisites)
             * [Start the application](#start-the-application)
         * [Multi-platform Docker build](#multi-platform-docker-build)
+        * [Run unit tests](#run-unit-tests)
+        * [Run integration tests](#run-integration-tests)
+        * [Run all tests](#run-all-tests)
+        * [Format the code](#format-the-code)
     * [Configurations](#configurations)
     * [Access the application](#access-the-application)
 
@@ -204,6 +208,50 @@ docker pull "ghcr.io/$GITHUB_USERNAME/$IMAGE" --platform linux/amd64
 
 # linux/arm64
 docker pull "ghcr.io/$GITHUB_USERNAME/$IMAGE" --platform linux/arm64
+```
+
+---
+
+### Run unit tests
+
+```shell
+export GIT_REPO_FOLDER='<set-your-path>'
+
+cd "$GIT_REPO_FOLDER"
+mvn clean install -P unit-tests
+```
+
+---
+
+### Run integration tests
+
+```shell
+export GIT_REPO_FOLDER='<set-your-path>'
+
+cd "$GIT_REPO_FOLDER"
+mvn clean install -P integration-tests
+```
+
+---
+
+### Run all tests
+
+```shell
+export GIT_REPO_FOLDER='<set-your-path>'
+
+cd "$GIT_REPO_FOLDER"
+mvn clean install -P tests
+```
+
+---
+
+### Format the code
+
+```shell
+export GIT_REPO_FOLDER='<set-your-path>'
+
+cd "$GIT_REPO_FOLDER"
+mvn verify -P format
 ```
 
 ---
