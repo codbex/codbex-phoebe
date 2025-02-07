@@ -26,10 +26,10 @@ import org.springframework.scheduling.annotation.EnableScheduling;
         exclude = {DataSourceAutoConfiguration.class, DataSourceTransactionManagerAutoConfiguration.class,
                 HibernateJpaAutoConfiguration.class, JdbcTemplateAutoConfiguration.class})
 @EnableScheduling
-public class AirflowApplication {
+public class PhoebeApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(AirflowApplication.class, args);
+        SpringApplication.run(PhoebeApplication.class, args);
     }
 
 }

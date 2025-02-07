@@ -10,7 +10,7 @@
  */
 package com.codbex.phoebe.ui;
 
-import com.codbex.phoebe.AirflowApplication;
+import com.codbex.phoebe.PhoebeApplication;
 import org.eclipse.dirigible.tests.DirigibleCleaner;
 import org.junit.jupiter.api.AfterEach;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,7 @@ import org.springframework.test.annotation.DirtiesContext.ClassMode;
 @ComponentScan(basePackages = "org.eclipse.dirigible.tests")
 @AutoConfigureMockMvc
 @DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT, classes = AirflowApplication.class)
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT, classes = PhoebeApplication.class)
 public abstract class IntegrationTest {
 
     @Autowired
