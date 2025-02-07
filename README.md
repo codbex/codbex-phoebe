@@ -1,26 +1,11 @@
 # codbex-phoebe
 
-Phoebe is a Web IDE which allows you to write [Apache Airflow](https://airflow.apache.org/) application in an efficient
-way.
-
-It has the following perspectives:
-
-- Workbench
-  ![workbench](misc/images/workbench.png)
-- Integrated Apache Airflow instance and embedded Apache Airflow Web UI
-  ![airflow-ui](misc/images/airflow-ui.png)
-- Git
-  ![git-perspective](misc/images/git-perspective.png)
-- Database Management
-  ![db-perspective](misc/images/db-perspective.png)
-- Terminal
-  ![terminal](misc/images/terminal.png)
-
-It also helps you to easily start your work using the defined Apache Airflow starter template.
+Web IDE for [Apache Airflow](https://airflow.apache.org/) workflows development.
 
 <!-- TOC -->
 
 * [codbex-phoebe](#codbex-phoebe)
+    * [Description](#description)
     * [Run steps](#run-steps)
         * [Start using Docker and released image](#start-using-docker-and-released-image)
             * [Start PostgreSQL](#start-postgresql)
@@ -39,6 +24,26 @@ It also helps you to easily start your work using the defined Apache Airflow sta
     * [Access the application](#access-the-application)
 
 <!-- TOC -->
+
+## Description
+
+Phoebe is a Web IDE which allows you to write [Apache Airflow](https://airflow.apache.org/) application in an efficient
+way.
+
+It has the following perspectives:
+
+- Workbench
+  ![workbench](misc/images/workbench.png)
+- Integrated Apache Airflow instance and embedded Apache Airflow Web UI
+  ![airflow-ui](misc/images/airflow-ui.png)
+- Git
+  ![git-perspective](misc/images/git-perspective.png)
+- Database Management
+  ![db-perspective](misc/images/db-perspective.png)
+- Terminal
+  ![terminal](misc/images/terminal.png)
+
+It also helps you to easily start your work using the defined Apache Airflow starter template.
 
 ## Run steps
 
