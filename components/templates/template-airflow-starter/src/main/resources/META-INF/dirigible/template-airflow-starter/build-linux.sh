@@ -14,7 +14,7 @@ log "Script path: $script_path"
 
 # Set source and target directories
 SOURCE_DIR="$(pwd)"
-TARGET_DIR="/opt/airflow"
+TARGET_DIR="${PHOEBE_AIRFLOW_WORK_DIR:-/opt/airflow}"
 DAGS_TARGET_DIR="$TARGET_DIR/dags/$project_name"
 
 # Check if the target directory exists, if not, create it
@@ -44,6 +44,9 @@ done
 
 # Handle dags folder separately
 if [ -d "$SOURCE_DIR/dags" ]; then
+  log "Deleting existing $DAGS_TARGET_DIR"
+  rm -rf "$DAGS_TARGET_DIR"
+
   log "Copying $SOURCE_DIR/dags to $DAGS_TARGET_DIR"
   mkdir -p "$DAGS_TARGET_DIR"
   if [ "$(ls -A "$SOURCE_DIR/dags")" ]; then

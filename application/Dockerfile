@@ -44,11 +44,13 @@ COPY ./webserver_config.py /opt/airflow
 # COPY application/docker/webserver_config.py /opt/airflow
 
 # Phoebe env variables
-ENV AIRFLOW_POSTGRES_USER="postgres"
-ENV AIRFLOW_POSTGRES_PASS="postgres"
-ENV AIRFLOW_POSTGRES_HOST="postgres"
-ENV AIRFLOW_POSTGRES_DB="postgres"
+ENV PHOEBE_AIRFLOW_POSTGRES_USER="postgres"
+ENV PHOEBE_AIRFLOW_POSTGRES_PASS="postgres"
+ENV PHOEBE_AIRFLOW_POSTGRES_HOST="postgres"
+ENV PHOEBE_AIRFLOW_POSTGRES_DB="postgres"
+ENV PHOEBE_AIRFLOW_WORK_DIR="/opt/airflow"
 
+# Airflow env variables
 ENV AIRFLOW__CORE__EXECUTOR="LocalExecutor"
 ENV AIRFLOW__CORE__LOAD_EXAMPLES="False"
 ENV _AIRFLOW_DB_MIGRATE="true"

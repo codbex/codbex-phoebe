@@ -1,11 +1,11 @@
 services:
   postgres:
     image: postgres:${POSTGRES_IMAGE_TAG-13}
-    hostname: ${AIRFLOW_POSTGRES_HOST:-postgres}
+    hostname: ${PHOEBE_AIRFLOW_POSTGRES_HOST:-postgres}
     environment:
-      - POSTGRES_USER=${AIRFLOW_POSTGRES_USER:-postgres}
-      - POSTGRES_PASSWORD=${AIRFLOW_POSTGRES_PASS:-postgres}
-      - POSTGRES_DB=${AIRFLOW_POSTGRES_DB:-postgres}
+      - POSTGRES_USER=${PHOEBE_AIRFLOW_POSTGRES_USER:-postgres}
+      - POSTGRES_PASSWORD=${PHOEBE_AIRFLOW_POSTGRES_PASS:-postgres}
+      - POSTGRES_DB=${PHOEBE_AIRFLOW_POSTGRES_DB:-postgres}
 #    volumes:
 #      - ${POSTGRES_DATA_DIR:-./postgresql_data}:/var/lib/postgresql/data
     healthcheck:
@@ -21,10 +21,10 @@ services:
     image: ${PHOEBE_IMAGE-codbex-phoebe:dev}
     container_name: phoebe
     environment:
-      - AIRFLOW_POSTGRES_USER=${AIRFLOW_POSTGRES_USER:-postgres}
-      - AIRFLOW_POSTGRES_PASS=${AIRFLOW_POSTGRES_PASS:-postgres}
-      - AIRFLOW_POSTGRES_HOST=${AIRFLOW_POSTGRES_HOST:-postgres}
-      - AIRFLOW_POSTGRES_DB=${AIRFLOW_POSTGRES_DB:-postgres}
+      - PHOEBE_AIRFLOW_POSTGRES_USER=${PHOEBE_AIRFLOW_POSTGRES_USER:-postgres}
+      - PHOEBE_AIRFLOW_POSTGRES_PASS=${PHOEBE_AIRFLOW_POSTGRES_PASS:-postgres}
+      - PHOEBE_AIRFLOW_POSTGRES_HOST=${PHOEBE_AIRFLOW_POSTGRES_HOST:-postgres}
+      - PHOEBE_AIRFLOW_POSTGRES_DB=${PHOEBE_AIRFLOW_POSTGRES_DB:-postgres}
     ports:
       - "80:80"
     depends_on:
