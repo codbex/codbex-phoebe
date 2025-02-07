@@ -23,6 +23,10 @@ export function getTemplate() {
 			action: "generate",
 			rename: "build-linux.sh"
 		},{
+			location: "/template-airflow-starter/build-mac.sh",
+			action: "generate",
+			rename: "build-mac.sh"
+		},{
 			location: "/template-airflow-starter/config/.empty",
 			action: "generate",
 			rename: "config/.empty"

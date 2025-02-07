@@ -7,6 +7,10 @@
         {
           "os": "linux",
           "command": "sh build-linux.sh"
+        },
+        {
+          "os": "mac",
+          "command": "sh build-mac.sh"
         }
       ],
       "publish": "true"
