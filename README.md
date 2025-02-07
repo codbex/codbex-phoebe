@@ -20,8 +20,10 @@ It also helps you to easily start your work using the defined Apache Airflow sta
         * [Build the project jar](#build-the-project-jar)
         * [Start locally using Docker and local sources](#start-locally-using-docker-and-local-sources)
         * [Start locally using Docker and released image](#start-locally-using-docker-and-released-image)
+            * [Start PostgreSQL](#start-postgresql)
+            * [Start Docker image](#start-docker-image)
         * [Java standalone application](#java-standalone-application)
-            * [Pre-requisites](#pre-requisites)
+            * [Prerequisites](#prerequisites)
             * [Start the application](#start-the-application)
         * [Access the application](#access-the-application)
         * [Multi-platform Docker build](#multi-platform-docker-build)
@@ -45,7 +47,7 @@ mvn -T 1C clean install \
 
 ### Start locally using Docker and local sources
 
-__Pre-requisites:__ [Build the project jar](#build-the-project-jar)
+__Prerequisites:__ [Build the project jar](#build-the-project-jar)
 
   ```shell
   export GIT_REPO_FOLDER='<set-your-path>'
@@ -63,45 +65,50 @@ __Pre-requisites:__ [Build the project jar](#build-the-project-jar)
 
 ### Start locally using Docker and released image
 
-**TODO**
+#### Start PostgreSQL
 
-__Pre-requisites:__ [Build the project jar](#build-the-project-jar)
+The instance which will be used for Airflow DB or used existing DB instance.
 
-  ```shell
-  export GIT_REPO_FOLDER='<set-your-path>'
-  export GIT_REPO_FOLDER='/Users/iliyan/work/git/codbex-airflow'
-  export IMAGE='codbex-phoebe:dev'
+```shell
+export PHOEBE_AIRFLOW_POSTGRES_USER="postgres"
+export PHOEBE_AIRFLOW_POSTGRES_PASS="postgres"
+export PHOEBE_AIRFLOW_POSTGRES_DB="postgres"
 
-  cd "$GIT_REPO_FOLDER/application"
-  
-  # cleanup
-  docker compose down -v
-  docker image rm $IMAGE --force
-  
-  export PHOEBE_IMAGE=$IMAGE
-  docker compose up
-  ```
+docker rm -f postgres
+
+docker run --name postgres \
+  -e POSTGRES_PASSWORD="$PHOEBE_AIRFLOW_POSTGRES_PASS" \
+  -e POSTGRES_USER="$PHOEBE_AIRFLOW_POSTGRES_USER" \
+  -e POSTGRES_DB="$PHOEBE_AIRFLOW_POSTGRES_DB" \
+  -p 5432:5432 \
+  -d postgres:13
+```
+
+#### Start Docker image
+
+```shell
+export PHOEBE_IMAGE='ghcr.io/cdobex/codbex-phoebe:latest'
+export PHOEBE_IMAGE='ghcr.io/iliyan-velichkov/codbex-phoebe:dev'
+
+docker rm -f phoebe
+
+docker pull "$PHOEBE_IMAGE"
+
+docker run --name phoebe  \
+    -p 80:80 \
+    -e PHOEBE_AIRFLOW_POSTGRES_USER="$PHOEBE_AIRFLOW_POSTGRES_USER" \
+    -e PHOEBE_AIRFLOW_POSTGRES_PASS="$PHOEBE_AIRFLOW_POSTGRES_PASS" \
+    -e PHOEBE_AIRFLOW_POSTGRES_HOST="host.docker.internal" \
+    -e PHOEBE_AIRFLOW_POSTGRES_DB="$PHOEBE_AIRFLOW_POSTGRES_DB" \
+    $PHOEBE_IMAGE
+```
 
 ### Java standalone application
 
-#### Pre-requisites
+#### Prerequisites
 
-- Start PostgreSQL instance which will be used for Airflow DB
-    ```shell
-    export PHOEBE_AIRFLOW_POSTGRES_USER="postgres"
-    export PHOEBE_AIRFLOW_POSTGRES_PASS="postgres"
-    export PHOEBE_AIRFLOW_POSTGRES_DB="postgres"
-    export PHOEBE_AIRFLOW_POSTGRES_HOST="localhost"
+- [Start PostgreSQL](#start-postgresql)
 
-    docker rm -f postgres
-    
-    docker run --name postgres \
-      -e POSTGRES_PASSWORD="$PHOEBE_AIRFLOW_POSTGRES_PASS" \
-      -e POSTGRES_USER="$PHOEBE_AIRFLOW_POSTGRES_USER" \
-      -e POSTGRES_DB="$PHOEBE_AIRFLOW_POSTGRES_DB" \
-      -p 5432:5432 \
-      -d postgres:13
-    ```
 - Start Airflow locally
     ```shell
     export AIRFLOW_WORK_DIR="$HOME/airflow_work"
@@ -164,7 +171,7 @@ __Pre-requisites:__ [Build the project jar](#build-the-project-jar)
 
 ### Multi-platform Docker build
 
-__Pre-requisites:__ [Build the project jar](#build-the-project-jar)
+__Prerequisites:__ [Build the project jar](#build-the-project-jar)
 
 ```shell
 export GIT_REPO_FOLDER='<set-your-path>'
