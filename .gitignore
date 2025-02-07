@@ -28,3 +28,5 @@ dist/
 *.log
 derby.log
 **/build
+
+ttyd.sh
