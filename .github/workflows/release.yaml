@@ -1,4 +1,4 @@
-name: Release
+name: Release - Platform
 
 on:
   workflow_dispatch:
