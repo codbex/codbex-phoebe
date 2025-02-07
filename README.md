@@ -40,9 +40,7 @@ export GIT_REPO_FOLDER='/Users/iliyan/work/git/codbex-airflow'
 
 cd $GIT_REPO_FOLDER
 
-mvn -T 1C clean install \
-  -D skipTests -D maven.test.skip=true \
-  -D maven.javadoc.skip=true -D license.skip=true
+mvn -T 1C clean install -P quick-build
 ```
 
 ### Start locally using Docker and local sources
