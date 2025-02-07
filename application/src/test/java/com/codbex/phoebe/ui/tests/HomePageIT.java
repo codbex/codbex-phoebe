@@ -8,16 +8,22 @@
  * SPDX-FileCopyrightText: 2022 codbex or an codbex affiliate company and contributors
  * SPDX-License-Identifier: EPL-2.0
  */
-package com.codbex.airflow;
+package com.codbex.phoebe.ui.tests;
 
+import org.eclipse.dirigible.tests.IDE;
+import org.eclipse.dirigible.tests.framework.HtmlElementType;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.beans.factory.annotation.Autowired;
 
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-public class ApplicationTest {
+class HomePageIT extends UserInterfaceIntegrationTest {
+
+    @Autowired
+    private IDE ide;
 
     @Test
-    public void contextLoads() {}
+    void testOpenHomepage() {
+        ide.openHomePage();
 
+        browser.assertElementExistsByTypeAndText(HtmlElementType.HEADER3, "Welcome to Phoebe");
+    }
 }

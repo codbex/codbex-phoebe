@@ -8,7 +8,7 @@
  * SPDX-FileCopyrightText: 2022 codbex or an codbex affiliate company and contributors
  * SPDX-License-Identifier: EPL-2.0
  */
-package com.codbex.airflow;
+package com.codbex.phoebe;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,10 +29,10 @@ class AppLifecycleLoggingListener implements ApplicationListener<ApplicationEven
     @Override
     public void onApplicationEvent(ApplicationEvent event) {
         if (event instanceof ApplicationReadyEvent) {
-            LOGGER.info("------------------------ Airflow started ------------------------");
+            LOGGER.info("------------------------ Phoebe started ------------------------");
         }
         if (event instanceof ContextClosedEvent) {
-            LOGGER.info("------------------------ Airflow stopped ------------------------");
+            LOGGER.info("------------------------ Phoebe stopped ------------------------");
         }
     }
 

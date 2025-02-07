@@ -8,22 +8,16 @@
  * SPDX-FileCopyrightText: 2022 codbex or an codbex affiliate company and contributors
  * SPDX-License-Identifier: EPL-2.0
  */
-package com.codbex.airflow.ui.tests;
+package com.codbex.phoebe;
 
-import org.eclipse.dirigible.tests.IDE;
-import org.eclipse.dirigible.tests.framework.HtmlElementType;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 
-class HomePageIT extends UserInterfaceIntegrationTest {
-
-    @Autowired
-    private IDE ide;
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+public class ApplicationTest {
 
     @Test
-    void testOpenHomepage() {
-        ide.openHomePage();
+    public void contextLoads() {}
 
-        browser.assertElementExistsByTypeAndText(HtmlElementType.HEADER3, "Welcome to Airflow");
-    }
 }

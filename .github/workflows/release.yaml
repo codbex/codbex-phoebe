@@ -26,9 +26,9 @@ jobs:
       release-content: |
         ## codbex-phoebe - ${{ inputs.release-version }}
         
-        Apache Airflow Web IDE
+        Phoebe is a Web IDE which allows you to write [Apache Airflow](https://airflow.apache.org/) application in an efficient way.
         
-        ## Deployment
+        ## Run steps
         
         ```
         docker run --name codbex-phoebe \
@@ -37,6 +37,9 @@ jobs:
         ```
         
         ## Access points:
-        
         - [http://localhost:80](http://localhost:80) - Web IDE
+        
+        ## Default credentials:
+        - user: `admin`
+        - password: `admin`
     secrets: inherit

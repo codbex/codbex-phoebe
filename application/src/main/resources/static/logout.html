@@ -11,39 +11,39 @@
 
 <html lang="en" ng-app="loginPage" ng-controller="LoginPageController">
 
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="icon" href="/services/web/resources/images/favicon.ico" />
-        <title>Airflow - Logged out</title>
-        <theme></theme>
-        <script type="text/javascript" src="/services/js/resources-core/services/loader.js?id=application-view-js">
-        </script>
-        <link type="text/css" rel="stylesheet"
-            href="/services/js/resources-core/services/loader.js?id=application-view-css" />
-    </head>
+<head>
+    <meta charset="utf-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link href="/services/web/resources/images/favicon.ico" rel="icon"/>
+    <title>Phoebe - Logged out</title>
+    <theme></theme>
+    <script src="/services/js/resources-core/services/loader.js?id=application-view-js" type="text/javascript">
+    </script>
+    <link href="/services/js/resources-core/services/loader.js?id=application-view-css" rel="stylesheet"
+          type="text/css"/>
+</head>
 
-    <body class="fd-scrollbar" dg-contextmenu="contextMenuContent">
+<body class="fd-scrollbar" dg-contextmenu="contextMenuContent">
 
-        <form name="loginForm" method="POST" action="/j_security_check" style="height: 600px; width: 100%;">
-            <fd-message-page glyph="sap-icon--log">
-                <fd-message-page-title>You've successfully logged out!</fd-message-page-title>
-                <fd-message-page-subtitle>
-                    Click <a class="fd-link" href="/home">here</a> to login again.
-                </fd-message-page-subtitle>
-                <hr>
+<form action="/j_security_check" method="POST" name="loginForm" style="height: 600px; width: 100%;">
+    <fd-message-page glyph="sap-icon--log">
+        <fd-message-page-title>You've successfully logged out!</fd-message-page-title>
+        <fd-message-page-subtitle>
+            Click <a class="fd-link" href="/home">here</a> to login again.
+        </fd-message-page-subtitle>
+        <hr>
 
-            </fd-message-page>
-        </form>
+    </fd-message-page>
+</form>
 
-        <script>
-            let loginPage = angular.module('loginPage', ['ideUI', 'ideView']);
+<script>
+    let loginPage = angular.module('loginPage', ['ideUI', 'ideView']);
 
-			loginPage.controller('LoginPageController', ['$scope', 'theming', function ($scope, theming) {
+    loginPage.controller('LoginPageController', ['$scope', 'theming', function ($scope, theming) {
 
-			}]);
-        </script>
-    </body>
+    }]);
+</script>
+</body>
 
 </html>

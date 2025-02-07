@@ -1,8 +1,8 @@
 {
-	"guid": "ide-branding",
-	"repository": {
-		"type": "git",
-		"branch": "main",
-		"url": "https://github.com/codbex/codbex-airflow.git"
-	}
+  "guid": "ide-branding",
+  "repository": {
+    "type": "git",
+    "branch": "main",
+    "url": "https://github.com/codbex/codbex-phoebe.git"
+  }
 }

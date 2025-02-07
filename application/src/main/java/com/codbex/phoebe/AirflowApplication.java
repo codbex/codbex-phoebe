@@ -8,7 +8,7 @@
  * SPDX-FileCopyrightText: 2022 codbex or an codbex affiliate company and contributors
  * SPDX-License-Identifier: EPL-2.0
  */
-package com.codbex.airflow;
+package com.codbex.phoebe;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -22,7 +22,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 @EnableJpaAuditing
 @EnableJpaRepositories
-@SpringBootApplication(scanBasePackages = {"com.codbex.airflow", "org.eclipse.dirigible.components"},
+@SpringBootApplication(scanBasePackages = {"com.codbex.phoebe", "org.eclipse.dirigible.components"},
         exclude = {DataSourceAutoConfiguration.class, DataSourceTransactionManagerAutoConfiguration.class,
                 HibernateJpaAutoConfiguration.class, JdbcTemplateAutoConfiguration.class})
 @EnableScheduling

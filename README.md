@@ -1,7 +1,7 @@
 # codbex-phoebe
 
-Phoebe Edition is a Web IDE which allows you to write [Apache Airflow](https://airflow.apache.org/) application in an
-efficient way.
+Phoebe is a Web IDE which allows you to write [Apache Airflow](https://airflow.apache.org/) application in an efficient
+way.
 
 It has the following perspectives:
 

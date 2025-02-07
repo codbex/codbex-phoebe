@@ -8,10 +8,10 @@
  * SPDX-FileCopyrightText: 2022 codbex or an codbex affiliate company and contributors
  * SPDX-License-Identifier: EPL-2.0
  */
-package com.codbex.airflow.ui.tests;
+package com.codbex.phoebe.ui.tests;
 
-import com.codbex.airflow.cfg.AppConfig;
-import com.codbex.airflow.ui.IntegrationTest;
+import com.codbex.phoebe.cfg.AppConfig;
+import com.codbex.phoebe.ui.IntegrationTest;
 import org.eclipse.dirigible.tests.IDE;
 import org.eclipse.dirigible.tests.restassured.RestAssuredExecutor;
 import org.junit.jupiter.api.Test;
