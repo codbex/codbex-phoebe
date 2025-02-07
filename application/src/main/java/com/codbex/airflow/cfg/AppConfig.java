@@ -18,7 +18,7 @@ import java.util.Base64;
 
 public enum AppConfig {
 
-    AIRFLOW_URL("PHOEBE_AIRFLOW_URL", "http://localhost:8080"),//
+    AIRFLOW_URL("PHOEBE_AIRFLOW_URL", "http://localhost:8080"), //
     AIRFLOW_WORK_DIR("PHOEBE_AIRFLOW_WORK_DIR", "/opt/airflow");
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AppConfig.class);
@@ -63,7 +63,8 @@ public enum AppConfig {
      */
     private static String fromBase64(String string) {
         return new String(Base64.getDecoder()
-                                .decode(string), StandardCharsets.UTF_8);
+                                .decode(string),
+                StandardCharsets.UTF_8);
     }
 
     /**
