@@ -1,4 +1,4 @@
-name: Build - Platform
+name: Build
 
 on:
   push:
