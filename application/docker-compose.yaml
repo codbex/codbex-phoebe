@@ -1,7 +1,6 @@
 services:
   postgres:
     image: postgres:${POSTGRES_IMAGE_TAG-13}
-    container_name: postgres
     hostname: ${AIRFLOW_POSTGRES_HOST:-postgres}
     environment:
       - POSTGRES_USER=${AIRFLOW_POSTGRES_USER:-postgres}
@@ -16,11 +15,11 @@ services:
       start_period: 5s
     restart: always
     networks:
-      - airflow_net
+      - phoebe_net
 
-  codbex-airflow:
-    image: codbex-airflow:dev
-    container_name: codbex-airflow
+  codbex-phoebe:
+    image: ${PHOEBE_IMAGE-codbex-phoebe:dev}
+    container_name: phoebe
     environment:
       - AIRFLOW_POSTGRES_USER=${AIRFLOW_POSTGRES_USER:-postgres}
       - AIRFLOW_POSTGRES_PASS=${AIRFLOW_POSTGRES_PASS:-postgres}
@@ -31,10 +30,10 @@ services:
     depends_on:
       - postgres
     networks:
-      - airflow_net
+      - phoebe_net
 
 networks:
-  airflow_net:
+  phoebe_net:
     driver: bridge
 
 volumes:
