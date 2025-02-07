@@ -6,10 +6,20 @@ way.
 It has the following perspectives:
 
 - Workbench
+  ![workbench](misc/images/workbench.png)
+
+  <a href="/misc/images/workbench.png" target="_blank>
+  <img src="misc/images/workbench.png" alt="workbench.png">
+  </a>
+
 - Integrated Apache Airflow instance and embedded Apache Airflow Web UI
+  ![airflow-ui](misc/images/airflow-ui.png)
 - Git
+  ![git-perspective](misc/images/git-perspective.png)
 - Database Management
+  ![db-perspective](misc/images/db-perspective.png)
 - Terminal
+  ![terminal](misc/images/terminal.png)
 
 It also helps you to easily start your work using the defined Apache Airflow starter template.
 
