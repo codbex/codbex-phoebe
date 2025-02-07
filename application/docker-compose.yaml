@@ -18,7 +18,11 @@ services:
       - phoebe_net
 
   codbex-phoebe:
-    image: ${PHOEBE_IMAGE-codbex-phoebe:dev}
+    build:
+      context: ./
+#      no_cache: true
+      tags:
+        - ${PHOEBE_IMAGE-codbex-phoebe:dev}
     container_name: phoebe
     environment:
       - PHOEBE_AIRFLOW_POSTGRES_USER=${PHOEBE_AIRFLOW_POSTGRES_USER:-postgres}
