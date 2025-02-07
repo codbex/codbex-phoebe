@@ -17,49 +17,23 @@ It also helps you to easily start your work using the defined Apache Airflow sta
 
 * [codbex-phoebe](#codbex-phoebe)
     * [Run steps](#run-steps)
-        * [Build the project jar](#build-the-project-jar)
-        * [Start locally using Docker and local sources](#start-locally-using-docker-and-local-sources)
-        * [Start locally using Docker and released image](#start-locally-using-docker-and-released-image)
+        * [Start using Docker and released image](#start-using-docker-and-released-image)
             * [Start PostgreSQL](#start-postgresql)
             * [Start Docker image](#start-docker-image)
+        * [Build the project jar](#build-the-project-jar)
+        * [Start using Docker Compose and local sources](#start-using-docker-compose-and-local-sources)
         * [Java standalone application](#java-standalone-application)
             * [Prerequisites](#prerequisites)
             * [Start the application](#start-the-application)
-        * [Access the application](#access-the-application)
         * [Multi-platform Docker build](#multi-platform-docker-build)
+    * [Configurations](#configurations)
+    * [Access the application](#access-the-application)
 
 <!-- TOC -->
 
 ## Run steps
 
-### Build the project jar
-
-```shell
-export GIT_REPO_FOLDER='<set-your-path>'
-
-cd $GIT_REPO_FOLDER
-
-mvn -T 1C clean install -P quick-build
-```
-
-### Start locally using Docker and local sources
-
-__Prerequisites:__ [Build the project jar](#build-the-project-jar)
-
-  ```shell
-  export GIT_REPO_FOLDER='<set-your-path>'
-
-  cd "$GIT_REPO_FOLDER/application"
-  
-  # cleanup
-  docker compose down -v
-  
-  # To force rebuild add --build
-  # Needed when you modify something in Dockerfile or in the application
-  docker compose up --build
-  ```
-
-### Start locally using Docker and released image
+### Start using Docker and released image
 
 #### Start PostgreSQL
 
@@ -97,6 +71,39 @@ docker run --name phoebe  \
     -e PHOEBE_AIRFLOW_POSTGRES_DB="$PHOEBE_AIRFLOW_POSTGRES_DB" \
     $PHOEBE_IMAGE
 ```
+
+---
+
+### Build the project jar
+
+```shell
+export GIT_REPO_FOLDER='<set-your-path>'
+
+cd $GIT_REPO_FOLDER
+
+mvn -T 1C clean install -P quick-build
+```
+
+---
+
+### Start using Docker Compose and local sources
+
+__Prerequisites:__ [Build the project jar](#build-the-project-jar)
+
+  ```shell
+  export GIT_REPO_FOLDER='<set-your-path>'
+
+  cd "$GIT_REPO_FOLDER/application"
+  
+  # cleanup
+  docker compose down -v
+  
+  # To force rebuild add --build
+  # Needed when you modify something in Dockerfile or in the application
+  docker compose up --build
+  ```
+
+--- 
 
 ### Java standalone application
 
@@ -157,10 +164,7 @@ docker run --name phoebe  \
         -jar application/target/*-application-*.jar
     ```
 
-### Access the application
-
-- Open URL [http://localhost](http://localhost) in your browser
-- Login with default credentials `admin` / `admin`
+---
 
 ### Multi-platform Docker build
 
@@ -201,3 +205,57 @@ docker pull "ghcr.io/$GITHUB_USERNAME/$IMAGE" --platform linux/amd64
 # linux/arm64
 docker pull "ghcr.io/$GITHUB_USERNAME/$IMAGE" --platform linux/arm64
 ```
+
+---
+
+## Configurations
+
+The following configurations are available:
+
+| Name                         | Description                                              | Default value           |
+|------------------------------|----------------------------------------------------------|-------------------------|
+| PHOEBE_AIRFLOW_URL           | The URL of the Airflow URL                               | `http://localhost:8080` |
+| PHOEBE_AIRFLOW_WORK_DIR      | Airflow working directory                                | `/opt/airflow`          |
+| PHOEBE_AIRFLOW_POSTGRES_USER | Docker config for Airflow PostgreSQL user                | `postgres`              |
+| PHOEBE_AIRFLOW_POSTGRES_PASS | Docker config for Airflow PostgreSQL password            | `postgres`              |
+| PHOEBE_AIRFLOW_POSTGRES_DB   | Docker config for Airflow PostgreSQL DB name             | `postgres`              |
+| PHOEBE_AIRFLOW_POSTGRES_HOST | Docker config for Airflow PostgreSQL host                | `postgres`              |
+| DIRIGIBLE_BASIC_USERNAME     | Phoebe admin username. The value must be Base64 encoded. | `YWRtaW4=`              |
+| DIRIGIBLE_BASIC_PASSWORD     | Phoebe admin password. The value must be Base64 encoded. | `YWRtaW4=`              |
+
+Depending on the use case these configurations could be set in different ways.
+
+- For java standalone application they could be set as environment variables.
+    ```shell
+    export PHOEBE_AIRFLOW_URL='http://localhost:8080'
+    java -jar ...
+    ```
+- For docker run
+    ```shell
+    docker run --name phoebe  \
+        -p 80:80 \
+        -e PHOEBE_AIRFLOW_POSTGRES_USER="$PHOEBE_AIRFLOW_POSTGRES_USER" \
+        -e PHOEBE_AIRFLOW_POSTGRES_PASS="$PHOEBE_AIRFLOW_POSTGRES_PASS" \
+        -e PHOEBE_AIRFLOW_POSTGRES_HOST="host.docker.internal" \
+        -e PHOEBE_AIRFLOW_POSTGRES_DB="$PHOEBE_AIRFLOW_POSTGRES_DB" \
+        $PHOEBE_IMAGE
+    ```
+- When using docker compose they could be set in the `docker-compose.yml` file.
+    ```yaml
+    services:
+      phoebe:
+        environment:
+          PHOEBE_AIRFLOW_POSTGRES_USER: postgres
+          PHOEBE_AIRFLOW_POSTGRES_PASS: postgres
+          PHOEBE_AIRFLOW_POSTGRES_HOST: host.docker.internal
+          PHOEBE_AIRFLOW_POSTGRES_DB: postgres
+    ```
+
+---
+
+## Access the application
+
+- Open URL [http://localhost](http://localhost) in your browser
+- Login with default credentials `admin` / `admin`
+
+--- 
