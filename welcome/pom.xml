@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.codbex.airflow</groupId>
-        <artifactId>codbex-airflow-parent</artifactId>
+        <groupId>com.codbex.phoebe</groupId>
+        <artifactId>codbex-phoebe-parent</artifactId>
         <version>2.0.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <name>codbex - airflow - welcome</name>
-    <artifactId>codbex-airflow-welcome</artifactId>
+    <name>codbex - phoebe - welcome</name>
+    <artifactId>codbex-phoebe-welcome</artifactId>
     <packaging>jar</packaging>
 
 </project>

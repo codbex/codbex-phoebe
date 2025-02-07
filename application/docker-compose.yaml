@@ -9,7 +9,7 @@ services:
 #    volumes:
 #      - ${POSTGRES_DATA_DIR:-./postgresql_data}:/var/lib/postgresql/data
     healthcheck:
-      test: [ "CMD", "pg_isready", "-U", "airflow" ]
+      test: [ "CMD", "pg_isready", "-U", "${PHOEBE_AIRFLOW_POSTGRES_USER:-postgres}" ]
       interval: 10s
       retries: 5
       start_period: 5s

@@ -1,6 +1,6 @@
-package com.codbex.airflow.proxy;
+package com.codbex.phoebe.proxy;
 
-import com.codbex.airflow.cfg.AppConfig;
+import com.codbex.phoebe.cfg.AppConfig;
 import org.springframework.cloud.gateway.server.mvc.filter.AfterFilterFunctions;
 import org.springframework.cloud.gateway.server.mvc.filter.BeforeFilterFunctions;
 import org.springframework.cloud.gateway.server.mvc.handler.GatewayRouterFunctions;
@@ -17,6 +17,9 @@ import static org.springframework.web.servlet.function.RequestPredicates.path;
 @Configuration
 public class AirflowProxyConfig {
 
+    // the path is used in file
+    // components/ide/ide-ui-airflow/src/main/resources/META-INF/dirigible/ide-airflow/airflow.html as
+    // well
     static final String RELATIVE_BASE_PATH = "services/airflow";
     static final String ABSOLUTE_BASE_PATH = "/" + RELATIVE_BASE_PATH;
     static final String BASE_PATH_PATTERN = ABSOLUTE_BASE_PATH + "/**";

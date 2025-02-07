@@ -7,7 +7,7 @@
  *
  * SPDX-FileCopyrightText: Eclipse Dirigible contributors SPDX-License-Identifier: EPL-2.0
  */
-package com.codbex.airflow.cfg;
+package com.codbex.phoebe.cfg;
 
 import org.eclipse.dirigible.commons.config.Configuration;
 import org.slf4j.Logger;

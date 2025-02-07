@@ -1,4 +1,4 @@
-package com.codbex.airflow.proxy;
+package com.codbex.phoebe.proxy;
 
 import org.eclipse.dirigible.components.base.http.access.CustomSecurityConfigurator;
 import org.eclipse.dirigible.components.base.http.roles.Roles;

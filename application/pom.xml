@@ -4,14 +4,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.codbex.airflow</groupId>
-        <artifactId>codbex-airflow-parent</artifactId>
+        <groupId>com.codbex.phoebe</groupId>
+        <artifactId>codbex-phoebe-parent</artifactId>
         <version>2.0.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <name>codbex - airflow - application</name>
-    <artifactId>codbex-airflow-application</artifactId>
+    <name>codbex - phoebe - application</name>
+    <artifactId>codbex-phoebe-application</artifactId>
     <packaging>jar</packaging>
 
     <dependencies>
@@ -20,14 +20,14 @@
             <artifactId>spring-cloud-starter-gateway-mvc</artifactId>
             <version>4.2.0</version>
         </dependency>
-        
+
         <dependency>
-            <groupId>com.codbex.airflow</groupId>
-            <artifactId>codbex-airflow-branding</artifactId>
+            <groupId>com.codbex.phoebe</groupId>
+            <artifactId>codbex-phoebe-branding</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.codbex.airflow</groupId>
-            <artifactId>codbex-airflow-welcome</artifactId>
+            <groupId>com.codbex.phoebe</groupId>
+            <artifactId>codbex-phoebe-welcome</artifactId>
         </dependency>
 
         <!-- Core -->
@@ -145,8 +145,8 @@
 
         <!-- IDE UI -->
         <dependency>
-            <groupId>com.codbex.airflow</groupId>
-            <artifactId>codbex-airflow-components-ide-ui-airflow</artifactId>
+            <groupId>com.codbex.phoebe</groupId>
+            <artifactId>codbex-phoebe-components-ide-ui-phoebe</artifactId>
         </dependency>
         <dependency>
             <groupId>org.eclipse.dirigible</groupId>
@@ -359,8 +359,8 @@
 
         <!-- Templates -->
         <dependency>
-            <groupId>com.codbex.airflow</groupId>
-            <artifactId>codbex-airflow-components-template-airflow-starter</artifactId>
+            <groupId>com.codbex.phoebe</groupId>
+            <artifactId>codbex-phoebe-components-template-phoebe-starter</artifactId>
         </dependency>
         <!--		<dependency>-->
         <!--			<groupId>org.eclipse.dirigible</groupId>-->

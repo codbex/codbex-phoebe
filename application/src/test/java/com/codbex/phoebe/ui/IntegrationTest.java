@@ -8,9 +8,9 @@
  * SPDX-FileCopyrightText: 2022 codbex or an codbex affiliate company and contributors
  * SPDX-License-Identifier: EPL-2.0
  */
-package com.codbex.airflow.ui;
+package com.codbex.phoebe.ui;
 
-import com.codbex.airflow.AirflowApplication;
+import com.codbex.phoebe.AirflowApplication;
 import org.eclipse.dirigible.tests.DirigibleCleaner;
 import org.junit.jupiter.api.AfterEach;
 import org.springframework.beans.factory.annotation.Autowired;
