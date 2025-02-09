@@ -11,4 +11,5 @@ jobs:
     with:
       platform-name: codbex-phoebe
       docker-build: true
+      upload-scanned-sarif-report: false
     secrets: inherit
