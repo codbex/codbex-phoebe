@@ -26,23 +26,23 @@ jobs:
       release-content: |
         ## codbex-phoebe - ${{ inputs.release-version }}
         
-        Phoebe is a Web IDE which allows you to write [Apache Airflow](https://airflow.apache.org/) application in an efficient way.
+        Phoebe is a Web IDE which allows you to write [Apache Airflow](https://airflow.apache.org/) applications in an efficient way.
         
         ## Run steps
         
         ### Start using Docker and released image
         
         #### Start PostgreSQL
-          
+        
           The instance which will be used for Airflow DB or used existing DB instance.
-          
+        
           ```shell
           export PHOEBE_AIRFLOW_POSTGRES_USER="postgres"
           export PHOEBE_AIRFLOW_POSTGRES_PASS="postgres"
           export PHOEBE_AIRFLOW_POSTGRES_DB="postgres"
-          
+        
           docker rm -f postgres
-          
+        
           docker run --name postgres \
           -e POSTGRES_PASSWORD="$PHOEBE_AIRFLOW_POSTGRES_PASS" \
           -e POSTGRES_USER="$PHOEBE_AIRFLOW_POSTGRES_USER" \
@@ -50,16 +50,16 @@ jobs:
           -p 5432:5432 \
           -d postgres:13
           ```
-          
+        
         #### Start Docker image
-          
+        
           ```shell
           export PHOEBE_IMAGE='ghcr.io/codbex/codbex-phoebe:${{ inputs.release-version }}'
-          
+        
           docker rm -f phoebe
-          
+        
           docker pull "$PHOEBE_IMAGE"
-          
+        
           docker run --name phoebe  \
           -p 80:80 \
           -e PHOEBE_AIRFLOW_POSTGRES_USER="$PHOEBE_AIRFLOW_POSTGRES_USER" \
