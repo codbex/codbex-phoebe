@@ -36,8 +36,9 @@ class TextResponseBodyRewriter implements BodyFilterFunctions.RewriteResponseFun
     private static final String NEW_BASE_PATH = AirflowProxyConfig.ABSOLUTE_BASE_PATH + "/";
 
     private static final String EXCEPT_STARTS_WITH_BASE_PATH = "(?!" + AirflowProxyConfig.RELATIVE_BASE_PATH + "/)";
+
     private static final Pattern REPLACE_PATTERN =
-            Pattern.compile("(?<=\\b(?:href|src|action|content)=[\"']|fetch\\(\")/" + EXCEPT_STARTS_WITH_BASE_PATH);
+            Pattern.compile("(?<=\\b(?:href|src|action|content)=[\"']|fetch\\([\"'])/" + EXCEPT_STARTS_WITH_BASE_PATH);
     private final String airflowUrl;
 
     TextResponseBodyRewriter() {
@@ -61,6 +62,16 @@ class TextResponseBodyRewriter implements BodyFilterFunctions.RewriteResponseFun
         byte[] body = getBody(request, response, originalBody);
 
         LOGGER.debug("Modifying response body since content type is [{}]", contentType);
+        String modifiedBody = rewriteBody(request, body);
+
+        byte[] responseBytes = modifiedBody.getBytes(StandardCharsets.UTF_8);
+        response.headers()
+                .set(HttpHeaders.CONTENT_LENGTH, String.valueOf(responseBytes.length));
+
+        return responseBytes;
+    }
+
+    String rewriteBody(ServerRequest request, byte[] body) {
         String stringBody = new String(body, StandardCharsets.UTF_8);
 
         Matcher matcher = REPLACE_PATTERN.matcher(stringBody);
@@ -77,12 +88,7 @@ class TextResponseBodyRewriter implements BodyFilterFunctions.RewriteResponseFun
 
             modifiedBody = modifiedBody.replace(airflowUrl, newAirflowUrl);
         }
-
-        byte[] responseBytes = modifiedBody.getBytes(StandardCharsets.UTF_8);
-        response.headers()
-                .set(HttpHeaders.CONTENT_LENGTH, String.valueOf(responseBytes.length));
-
-        return responseBytes;
+        return modifiedBody;
     }
 
     private byte[] getBody(ServerRequest request, ServerResponse response, byte[] originalBody) {
