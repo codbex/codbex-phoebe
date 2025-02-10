@@ -51,7 +51,7 @@ jobs:
           -d postgres:13
           ```
           
-          #### Start Docker image
+        #### Start Docker image
           
           ```shell
           export PHOEBE_IMAGE='ghcr.io/codbex/codbex-phoebe:${{ inputs.release-version }}'
@@ -68,8 +68,6 @@ jobs:
           -e PHOEBE_AIRFLOW_POSTGRES_DB="$PHOEBE_AIRFLOW_POSTGRES_DB" \
           $PHOEBE_IMAGE
           ```
-        
-        ```
         
         ## Access points:
         - [http://localhost:80](http://localhost:80) - Web IDE
