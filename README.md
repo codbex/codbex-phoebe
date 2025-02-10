@@ -3,24 +3,26 @@
 Web IDE for [Apache Airflow](https://airflow.apache.org/) workflows development.
 
 <!-- TOC -->
+
 * [codbex-phoebe](#codbex-phoebe)
-  * [Description](#description)
-  * [Run steps](#run-steps)
-    * [Start using Docker and released image](#start-using-docker-and-released-image)
-      * [Start PostgreSQL](#start-postgresql)
-      * [Start Docker image](#start-docker-image)
-    * [Build the project jar](#build-the-project-jar)
-    * [Start using Docker Compose and local sources](#start-using-docker-compose-and-local-sources)
-    * [Java standalone application](#java-standalone-application)
-      * [Prerequisites](#prerequisites)
-      * [Start the application](#start-the-application)
-    * [Multi-platform Docker build](#multi-platform-docker-build)
-    * [Run unit tests](#run-unit-tests)
-    * [Run integration tests](#run-integration-tests)
-    * [Run all tests](#run-all-tests)
-    * [Format the code](#format-the-code)
-  * [Configurations](#configurations)
-  * [Access the application](#access-the-application)
+    * [Description](#description)
+    * [Run steps](#run-steps)
+        * [Start using Docker and released image](#start-using-docker-and-released-image)
+            * [Start PostgreSQL](#start-postgresql)
+            * [Start Docker image](#start-docker-image)
+        * [Build the project jar](#build-the-project-jar)
+        * [Start using Docker Compose and local sources](#start-using-docker-compose-and-local-sources)
+        * [Java standalone application](#java-standalone-application)
+            * [Prerequisites](#prerequisites)
+            * [Start the application](#start-the-application)
+        * [Multi-platform Docker build](#multi-platform-docker-build)
+        * [Run unit tests](#run-unit-tests)
+        * [Run integration tests](#run-integration-tests)
+        * [Run all tests](#run-all-tests)
+        * [Format the code](#format-the-code)
+    * [Configurations](#configurations)
+    * [Access the application](#access-the-application)
+
 <!-- TOC -->
 
 ## Description
@@ -145,6 +147,7 @@ __Prerequisites:__ [Build the project jar](#build-the-project-jar)
     -e _AIRFLOW_DB_MIGRATE=true \
     -e AIRFLOW__SCHEDULER__DAG_DIR_LIST_INTERVAL=5 \
     -e AIRFLOW__CORE__EXECUTOR=LocalExecutor \
+    -e AIRFLOW__WEBSERVER__BASE_URL="http://localhost:8080/services/airflow" \
     -e AIRFLOW__DATABASE__SQL_ALCHEMY_CONN="postgresql+psycopg2://$PHOEBE_AIRFLOW_POSTGRES_USER:$PHOEBE_AIRFLOW_POSTGRES_PASS@host.docker.internal:5432/$PHOEBE_AIRFLOW_POSTGRES_DB" \
     -d apache/airflow:2.10.4 standalone
     ```
@@ -273,22 +276,22 @@ mvn verify -P format
 
 The following configurations are available:
 
-| Name                         | Description                                              | Default value           |
-|------------------------------|----------------------------------------------------------|-------------------------|
-| PHOEBE_AIRFLOW_URL           | The URL of the Airflow URL                               | `http://localhost:8080` |
-| PHOEBE_AIRFLOW_WORK_DIR      | Airflow working directory                                | `/opt/airflow`          |
-| PHOEBE_AIRFLOW_POSTGRES_USER | Docker config for Airflow PostgreSQL user                | `postgres`              |
-| PHOEBE_AIRFLOW_POSTGRES_PASS | Docker config for Airflow PostgreSQL password            | `postgres`              |
-| PHOEBE_AIRFLOW_POSTGRES_DB   | Docker config for Airflow PostgreSQL DB name             | `postgres`              |
-| PHOEBE_AIRFLOW_POSTGRES_HOST | Docker config for Airflow PostgreSQL host                | `postgres`              |
-| DIRIGIBLE_BASIC_USERNAME     | Phoebe admin username. The value must be Base64 encoded. | `YWRtaW4=`              |
-| DIRIGIBLE_BASIC_PASSWORD     | Phoebe admin password. The value must be Base64 encoded. | `YWRtaW4=`              |
+| Name                         | Description                                                                                    | Default value                            |
+|------------------------------|------------------------------------------------------------------------------------------------|------------------------------------------|
+| PHOEBE_AIRFLOW_URL           | The URL of the Airflow URL. Note that the base path of the Airflow must be `/services/airflow` | `http://localhost:8080/services/airflow` |
+| PHOEBE_AIRFLOW_WORK_DIR      | Airflow working directory                                                                      | `/opt/airflow`                           |
+| PHOEBE_AIRFLOW_POSTGRES_USER | Docker config for Airflow PostgreSQL user                                                      | `postgres`                               |
+| PHOEBE_AIRFLOW_POSTGRES_PASS | Docker config for Airflow PostgreSQL password                                                  | `postgres`                               |
+| PHOEBE_AIRFLOW_POSTGRES_DB   | Docker config for Airflow PostgreSQL DB name                                                   | `postgres`                               |
+| PHOEBE_AIRFLOW_POSTGRES_HOST | Docker config for Airflow PostgreSQL host                                                      | `postgres`                               |
+| DIRIGIBLE_BASIC_USERNAME     | Phoebe admin username. The value must be Base64 encoded.                                       | `YWRtaW4=`                               |
+| DIRIGIBLE_BASIC_PASSWORD     | Phoebe admin password. The value must be Base64 encoded.                                       | `YWRtaW4=`                               |
 
 Depending on the use case these configurations could be set in different ways.
 
 - For java standalone application they could be set as environment variables.
     ```shell
-    export PHOEBE_AIRFLOW_URL='http://localhost:8080'
+    export PHOEBE_AIRFLOW_URL='http://localhost:8080/services/airflow'
     java -jar ...
     ```
 - For docker run

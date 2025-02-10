@@ -19,7 +19,7 @@ import java.util.Base64;
 
 public enum AppConfig {
 
-    AIRFLOW_URL("PHOEBE_AIRFLOW_URL", "http://localhost:8080"), //
+    AIRFLOW_URL("PHOEBE_AIRFLOW_URL", "http://localhost:8080/services/airflow"), //
     AIRFLOW_WORK_DIR("PHOEBE_AIRFLOW_WORK_DIR", "/opt/airflow");
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AppConfig.class);

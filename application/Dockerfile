@@ -55,5 +55,6 @@ ENV AIRFLOW__CORE__EXECUTOR="LocalExecutor"
 ENV AIRFLOW__CORE__LOAD_EXAMPLES="False"
 ENV _AIRFLOW_DB_MIGRATE="true"
 ENV AIRFLOW__SCHEDULER__DAG_DIR_LIST_INTERVAL="5"
+ENV AIRFLOW__WEBSERVER__BASE_URL="http://localhost:8080/services/airflow"
 
 ENTRYPOINT ["/opt/airflow/codbex/start.sh"]
