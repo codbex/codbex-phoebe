@@ -54,9 +54,14 @@ class TextResponseBodyRewriterTest {
                     <meta name="dags_index" content='/home'>
                     fetch("/spec.json")
                     fetch('/spec.json')
+                    <redoc spec-url="/api/v1/openapi.yaml"></redoc>
+
                     http://localhost:8080/some/aiflow/path
                     http://localhost:8080
                     http://localhost:8080/services/airflow/some/other/path
+
+                    <a href="/dags/demo/trigger?origin=%2Fdags%2Fdemo%2Fgrid"
+                    <a href="/delete?dag_id=demo&amp;redirect_url=%2Fdags%2Fdemo%2Fgrid"
                 """.getBytes(StandardCharsets.UTF_8);
 
         byte[] expectedBody = """
@@ -68,9 +73,14 @@ class TextResponseBodyRewriterTest {
                     <meta name="dags_index" content='/services/airflow/home'>
                     fetch("/services/airflow/spec.json")
                     fetch('/services/airflow/spec.json')
+                    <redoc spec-url="/services/airflow/api/v1/openapi.yaml"></redoc>
+
                     http://localhost:80/services/airflow/some/aiflow/path
                     http://localhost:80/services/airflow
                     http://localhost:80/services/airflow/some/other/path
+
+                    <a href="/services/airflow/dags/demo/trigger?origin=%2Fservices%2Fairflow%2Fdags%2Fdemo%2Fgrid"
+                    <a href="/services/airflow/delete?dag_id=demo&amp;redirect_url=%2Fservices%2Fairflow%2Fdags%2Fdemo%2Fgrid"
                 """.getBytes(StandardCharsets.UTF_8);
 
         when(request.uri()).thenReturn(URI.create("http://localhost:80"));

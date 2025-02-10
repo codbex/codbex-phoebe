@@ -24,6 +24,8 @@ import org.springframework.web.servlet.function.ServerResponse;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.net.URI;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -39,7 +41,10 @@ class TextResponseBodyRewriter implements BodyFilterFunctions.RewriteResponseFun
     private static final String EXCEPT_STARTS_WITH_BASE_PATH = "(?!" + AirflowProxyConfig.RELATIVE_BASE_PATH + "/)";
 
     private static final Pattern REPLACE_PATTERN =
-            Pattern.compile("(?<=\\b(?:href|src|action|content)=[\"']|fetch\\([\"'])/" + EXCEPT_STARTS_WITH_BASE_PATH);
+            Pattern.compile("(?<=\\b(?:href|src|action|content|spec-url)=[\"']|fetch\\([\"'])/" + EXCEPT_STARTS_WITH_BASE_PATH);
+
+    private static final Pattern URL_ENCODED_QUERY_PARAM_PATTERN =
+            Pattern.compile("(\\b(?:origin|redirect_url)=)(%2F[^\"'&]*)", Pattern.CASE_INSENSITIVE);
 
     private final String airflowUrl;
     private final Pattern fullURLPattern;
@@ -79,7 +84,9 @@ class TextResponseBodyRewriter implements BodyFilterFunctions.RewriteResponseFun
         String stringBody = new String(body, StandardCharsets.UTF_8);
 
         String modifiedBody = rewriteRelativePaths(stringBody);
-        return rewriteFullURLs(request, modifiedBody);
+        modifiedBody = rewriteFullURLs(request, modifiedBody);
+
+        return rewriteEncodedQueryParams(modifiedBody);
     }
 
     private static String rewriteRelativePaths(String stringBody) {
@@ -105,6 +112,26 @@ class TextResponseBodyRewriter implements BodyFilterFunctions.RewriteResponseFun
             String replacement = newAirflowUrl + (extraPath != null ? "/" + extraPath : "");
 
             matcher.appendReplacement(result, replacement);
+        }
+        matcher.appendTail(result);
+
+        return result.toString();
+    }
+
+    private String rewriteEncodedQueryParams(String body) {
+        Matcher matcher = URL_ENCODED_QUERY_PARAM_PATTERN.matcher(body);
+        StringBuffer result = new StringBuffer();
+
+        while (matcher.find()) {
+            String paramName = matcher.group(1); // "origin=" or "redirect_url="
+            String encodedPath = matcher.group(2); // query parameter value
+
+            // Decode the path, prepend "/services/airflow", then re-encode it
+            String decodedPath = URLDecoder.decode(encodedPath, StandardCharsets.UTF_8);
+            String updatedPath = "/services/airflow" + decodedPath;
+            String reEncodedPath = URLEncoder.encode(updatedPath, StandardCharsets.UTF_8);
+
+            matcher.appendReplacement(result, paramName + reEncodedPath);
         }
         matcher.appendTail(result);
 
