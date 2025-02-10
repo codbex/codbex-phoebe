@@ -11,6 +11,8 @@
 package com.codbex.phoebe.proxy;
 
 import com.codbex.phoebe.cfg.AppConfig;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.cloud.gateway.server.mvc.filter.AfterFilterFunctions;
 import org.springframework.cloud.gateway.server.mvc.filter.BeforeFilterFunctions;
 import org.springframework.cloud.gateway.server.mvc.handler.GatewayRouterFunctions;
@@ -19,8 +21,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.function.RouterFunction;
 import org.springframework.web.servlet.function.ServerResponse;
 
-import java.util.regex.Pattern;
-
 import static org.springframework.cloud.gateway.server.mvc.handler.HandlerFunctions.http;
 import static org.springframework.web.servlet.function.RequestPredicates.path;
 
@@ -28,28 +28,27 @@ import static org.springframework.web.servlet.function.RequestPredicates.path;
 public class AirflowProxyConfig {
 
     // the path is used in file
-    // components/ide/ide-ui-airflow/src/main/resources/META-INF/dirigible/ide-airflow/airflow.html as
-    // well
+    // components/ide/ide-ui-airflow/src/main/resources/META-INF/dirigible/ide-airflow/airflow.html
     static final String RELATIVE_BASE_PATH = "services/airflow";
     static final String ABSOLUTE_BASE_PATH = "/" + RELATIVE_BASE_PATH;
     static final String BASE_PATH_PATTERN = ABSOLUTE_BASE_PATH + "/**";
 
-    private static final String EXCEPT_STARTS_WITH_BASE_PATH = "(?!" + RELATIVE_BASE_PATH + "/)";
-    private static final Pattern REPLACE_PATTERN =
-            Pattern.compile("(?<=\\b(?:href|src|action|content|fetch\\(\")=['\"]?)/" + EXCEPT_STARTS_WITH_BASE_PATH);
+    private static final Logger LOGGER = LoggerFactory.getLogger(AirflowProxyConfig.class);
 
-    private final String airflowUrl;
     private final RelativeLocationHeaderRewriter relativeLocationHeaderRewriter;
     private final TextResponseBodyRewriter textResponseBodyRewriter;
 
     AirflowProxyConfig(RelativeLocationHeaderRewriter relativeLocationHeaderRewriter, TextResponseBodyRewriter textResponseBodyRewriter) {
-        this.airflowUrl = AppConfig.AIRFLOW_URL.getStringValue();
         this.relativeLocationHeaderRewriter = relativeLocationHeaderRewriter;
         this.textResponseBodyRewriter = textResponseBodyRewriter;
     }
 
     @Bean
     RouterFunction<ServerResponse> configureAirflowProxy() {
+        String airflowUrl = AppConfig.AIRFLOW_URL.getStringValue();
+
+        LOGGER.info("Configuring Airflow proxy for path [{}] to URL [{}]", BASE_PATH_PATTERN, airflowUrl);
+
         return GatewayRouterFunctions.route("airflow-proxy-route")
                                      .GET(path(AirflowProxyConfig.BASE_PATH_PATTERN), http(airflowUrl))
                                      .POST(path(AirflowProxyConfig.BASE_PATH_PATTERN), http(airflowUrl))
