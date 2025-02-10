@@ -44,11 +44,11 @@ jobs:
           docker rm -f postgres
         
           docker run --name postgres \
-          -e POSTGRES_PASSWORD="$PHOEBE_AIRFLOW_POSTGRES_PASS" \
-          -e POSTGRES_USER="$PHOEBE_AIRFLOW_POSTGRES_USER" \
-          -e POSTGRES_DB="$PHOEBE_AIRFLOW_POSTGRES_DB" \
-          -p 5432:5432 \
-          -d postgres:13
+            -e POSTGRES_PASSWORD="$PHOEBE_AIRFLOW_POSTGRES_PASS" \
+            -e POSTGRES_USER="$PHOEBE_AIRFLOW_POSTGRES_USER" \
+            -e POSTGRES_DB="$PHOEBE_AIRFLOW_POSTGRES_DB" \
+            -p 5432:5432 \
+            -d postgres:13
           ```
         
         #### Start Docker image
@@ -61,12 +61,12 @@ jobs:
           docker pull "$PHOEBE_IMAGE"
         
           docker run --name phoebe  \
-          -p 80:80 \
-          -e PHOEBE_AIRFLOW_POSTGRES_USER="$PHOEBE_AIRFLOW_POSTGRES_USER" \
-          -e PHOEBE_AIRFLOW_POSTGRES_PASS="$PHOEBE_AIRFLOW_POSTGRES_PASS" \
-          -e PHOEBE_AIRFLOW_POSTGRES_HOST="host.docker.internal" \
-          -e PHOEBE_AIRFLOW_POSTGRES_DB="$PHOEBE_AIRFLOW_POSTGRES_DB" \
-          $PHOEBE_IMAGE
+            -p 80:80 \
+            -e PHOEBE_AIRFLOW_POSTGRES_USER="$PHOEBE_AIRFLOW_POSTGRES_USER" \
+            -e PHOEBE_AIRFLOW_POSTGRES_PASS="$PHOEBE_AIRFLOW_POSTGRES_PASS" \
+            -e PHOEBE_AIRFLOW_POSTGRES_HOST="host.docker.internal" \
+            -e PHOEBE_AIRFLOW_POSTGRES_DB="$PHOEBE_AIRFLOW_POSTGRES_DB" \
+            $PHOEBE_IMAGE
           ```
         
         ## Access points:
