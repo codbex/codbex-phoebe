@@ -1,8 +1,12 @@
 package com.codbex.phoebe.proxy;
 
 import com.codbex.phoebe.cfg.AppConfig;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.web.servlet.function.ServerRequest;
@@ -17,20 +21,26 @@ import java.util.zip.GZIPOutputStream;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+@ExtendWith(MockitoExtension.class)
 class TextResponseBodyRewriterTest {
 
+    @InjectMocks
     private TextResponseBodyRewriter rewriter;
+
+    @Mock
     private ServerRequest request;
+
+    @Mock
     private ServerResponse response;
 
-    @BeforeEach
-    void setUp() {
-        rewriter = new TextResponseBodyRewriter();
-        request = mock(ServerRequest.class);
-        response = mock(ServerResponse.class);
+    @Mock
+    private HttpHeaders responseHeaders;
+
+    @BeforeAll
+    public static void setUp() {
+        AppConfig.AIRFLOW_URL.setValues("http://localhost:8080");
     }
 
     @Test
@@ -44,6 +54,9 @@ class TextResponseBodyRewriterTest {
                     <meta name="dags_index" content='/home'>
                     fetch("/spec.json")
                     fetch('/spec.json')
+                    http://localhost:8080/some/aiflow/path
+                    http://localhost:8080
+                    http://localhost:8080/services/airflow/some/other/path
                 """.getBytes(StandardCharsets.UTF_8);
 
         byte[] expectedBody = """
@@ -55,12 +68,13 @@ class TextResponseBodyRewriterTest {
                     <meta name="dags_index" content='/services/airflow/home'>
                     fetch("/services/airflow/spec.json")
                     fetch('/services/airflow/spec.json')
+                    http://localhost:80/services/airflow/some/aiflow/path
+                    http://localhost:80/services/airflow
+                    http://localhost:80/services/airflow/some/other/path
                 """.getBytes(StandardCharsets.UTF_8);
 
-        ServerRequest.Headers requestHeaders = mock(ServerRequest.Headers.class);
-        when(request.headers()).thenReturn(requestHeaders);
+        when(request.uri()).thenReturn(URI.create("http://localhost:80"));
 
-        HttpHeaders responseHeaders = mock(HttpHeaders.class);
         when(responseHeaders.getContentType()).thenReturn(MediaType.TEXT_HTML);
         when(response.headers()).thenReturn(responseHeaders);
 
@@ -84,14 +98,10 @@ class TextResponseBodyRewriterTest {
 
     @Test
     void rewriteBody_shouldReplaceAirflowUrl_whenHostHeaderIsPresent() {
-        AppConfig.AIRFLOW_URL.setValues("http://localhost:8080");
         byte[] body = "<html><body>http://localhost:8080</body></html>".getBytes(StandardCharsets.UTF_8);
         String expectedBody = "<html><body>http://localhost:8080/services/airflow</body></html>";
 
-        ServerRequest.Headers headers = mock(ServerRequest.Headers.class);
-        when(headers.firstHeader(HttpHeaders.HOST)).thenReturn("localhost:8080");
-        when(request.headers()).thenReturn(headers);
-        when(request.uri()).thenReturn(URI.create("http://localhost:8080"));
+        when(request.uri()).thenReturn(URI.create("http://localhost:8080/services/airflow"));
 
         String result = rewriter.rewriteBody(request, body);
 
@@ -103,8 +113,7 @@ class TextResponseBodyRewriterTest {
         byte[] body = "<html><body>http://old-airflow-url</body></html>".getBytes(StandardCharsets.UTF_8);
         String expectedBody = "<html><body>http://old-airflow-url</body></html>";
 
-        ServerRequest.Headers headers = mock(ServerRequest.Headers.class);
-        when(request.headers()).thenReturn(headers);
+        when(request.uri()).thenReturn(URI.create("http://localhost:8080/services/airflow"));
 
         String result = rewriter.rewriteBody(request, body);
 
@@ -119,15 +128,15 @@ class TextResponseBodyRewriterTest {
         return byteArrayOutputStream.toByteArray();
     }
 
-    //    @Test
-    //    void getBody_shouldReturnOriginalBody_whenNotGzipped() {
-    //        byte[] originalBody = "<html><body>content</body></html>".getBytes(StandardCharsets.UTF_8);
-    //
-    //        HttpHeaders headers = new HttpHeaders();
-    //        when(response.headers()).thenReturn(headers);
-    //
-    //        byte[] result = rewriter.getBody(request, response, originalBody);
-    //
-    //        assertArrayEquals(originalBody, result);
-    //    }
+    @Test
+    void getBody_shouldReturnOriginalBody_whenNotGzipped() {
+        byte[] originalBody = "<html><body>content</body></html>".getBytes(StandardCharsets.UTF_8);
+
+        HttpHeaders responseHeaders = new HttpHeaders();
+        when(response.headers()).thenReturn(responseHeaders);
+
+        byte[] result = rewriter.apply(request, response, originalBody);
+
+        assertArrayEquals(originalBody, result);
+    }
 }
