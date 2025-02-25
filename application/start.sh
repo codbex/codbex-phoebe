@@ -16,4 +16,4 @@ echo "Starting java application..."
 java --add-opens=java.base/java.lang=ALL-UNNAMED \
      --add-opens=java.base/java.lang.reflect=ALL-UNNAMED \
      --add-opens=java.base/java.nio=ALL-UNNAMED \
-     -jar ./application.jar
+     -jar ./codbex-phoebe.jar
