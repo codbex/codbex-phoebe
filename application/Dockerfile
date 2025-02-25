@@ -31,7 +31,7 @@ RUN mkdir -p /opt/airflow/codbex && \
 USER airflow
 
 # Copy your Spring Boot application JAR into the container
-COPY target/codbex-phoebe-[0-9]*.jar /opt/airflow/codbex/codbex-phoebe.jar
+COPY ./target/codbex-phoebe-[0-9]*.jar /opt/airflow/codbex/codbex-phoebe.jar
 
 # Expose 80 for the Java app only
 EXPOSE 80
