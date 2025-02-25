@@ -91,7 +91,7 @@ docker run --name phoebe  \
 ### Build the project jar
 
 ```shell
-export GIT_REPO_FOLDER='/Users/iliyan/work/git/codbex-phoebe'
+export GIT_REPO_FOLDER='<path-to-the-git-repo>'
 
 cd $GIT_REPO_FOLDER
 
@@ -105,7 +105,7 @@ mvn -T 1C clean install -P quick-build
 __Prerequisites:__ [Build the project jar](#build-the-project-jar)
 
   ```shell
-  export GIT_REPO_FOLDER='/Users/iliyan/work/git/codbex-phoebe'
+  export GIT_REPO_FOLDER='<path-to-the-git-repo>'
 
   cd "$GIT_REPO_FOLDER/application"
   
@@ -127,7 +127,7 @@ __Prerequisites:__ [Build the project jar](#build-the-project-jar)
 
 - Start Airflow locally
     ```shell
-    export GIT_REPO_FOLDER='/Users/iliyan/work/git/codbex-phoebe'
+    export GIT_REPO_FOLDER='<path-to-the-git-repo>'
     cd "$GIT_REPO_FOLDER"
   
     export AIRFLOW_WORK_DIR="$HOME/airflow_work"
@@ -158,7 +158,7 @@ __Prerequisites:__ [Build the project jar](#build-the-project-jar)
 
 - Start the application
     ```shell
-    export GIT_REPO_FOLDER='/Users/iliyan/work/git/codbex-phoebe'
+    export GIT_REPO_FOLDER='<path-to-the-git-repo>'
     cd "$GIT_REPO_FOLDER"
   
     export PHOEBE_AIRFLOW_WORK_DIR="$AIRFLOW_WORK_DIR"
@@ -171,7 +171,7 @@ __Prerequisites:__ [Build the project jar](#build-the-project-jar)
 
 - Start the application **in debug** with debug port `8000`
     ```shell
-    export GIT_REPO_FOLDER='/Users/iliyan/work/git/codbex-phoebe'
+    export GIT_REPO_FOLDER='<path-to-the-git-repo>'
     cd "$GIT_REPO_FOLDER"
   
     export PHOEBE_AIRFLOW_WORK_DIR="$AIRFLOW_WORK_DIR"
@@ -190,7 +190,7 @@ __Prerequisites:__ [Build the project jar](#build-the-project-jar)
 __Prerequisites:__ [Build the project jar](#build-the-project-jar)
 
 ```shell
-export GIT_REPO_FOLDER='/Users/iliyan/work/git/codbex-phoebe'
+export GIT_REPO_FOLDER='<path-to-the-git-repo>'
 export IMAGE='codbex-phoebe:dev'
 export GITHUB_USERNAME='<your-github-user>'
 
@@ -230,7 +230,7 @@ docker pull "ghcr.io/$GITHUB_USERNAME/$IMAGE" --platform linux/arm64
 ### Run unit tests
 
 ```shell
-export GIT_REPO_FOLDER='/Users/iliyan/work/git/codbex-phoebe'
+export GIT_REPO_FOLDER='<path-to-the-git-repo>'
 
 cd "$GIT_REPO_FOLDER"
 mvn clean install -P unit-tests
@@ -241,7 +241,7 @@ mvn clean install -P unit-tests
 ### Run integration tests
 
 ```shell
-export GIT_REPO_FOLDER='/Users/iliyan/work/git/codbex-phoebe'
+export GIT_REPO_FOLDER='<path-to-the-git-repo>'
 
 cd "$GIT_REPO_FOLDER"
 mvn clean install -P integration-tests
@@ -252,7 +252,7 @@ mvn clean install -P integration-tests
 ### Run all tests
 
 ```shell
-export GIT_REPO_FOLDER='/Users/iliyan/work/git/codbex-phoebe'
+export GIT_REPO_FOLDER='<path-to-the-git-repo>'
 
 cd "$GIT_REPO_FOLDER"
 mvn clean install -P tests
@@ -263,7 +263,7 @@ mvn clean install -P tests
 ### Format the code
 
 ```shell
-export GIT_REPO_FOLDER='/Users/iliyan/work/git/codbex-phoebe'
+export GIT_REPO_FOLDER='<path-to-the-git-repo>'
 
 cd "$GIT_REPO_FOLDER"
 mvn verify -P format
