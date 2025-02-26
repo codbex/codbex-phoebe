@@ -31,6 +31,5 @@ class AirflowPerspectiveIT extends UserInterfaceIntegrationTest {
         ide.openPath("/services/web/ide-airflow/index.html");
 
         browser.assertElementExistsByTypeAndContainsText(HtmlElementType.HEADER2, "httpbin.org");
-        //        browser.assertElementExistsByTypeAndText(HtmlElementType.ANCHOR, "Send email to the developer");
     }
 }
