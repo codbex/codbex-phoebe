@@ -8,9 +8,9 @@
  * SPDX-FileCopyrightText: 2022 codbex or an codbex affiliate company and contributors
  * SPDX-License-Identifier: EPL-2.0
  */
-package com.codbex.airflow.ui.tests;
+package com.codbex.phoebe.ui.tests;
 
-import com.codbex.airflow.cfg.AppConfig;
+import com.codbex.phoebe.cfg.AppConfig;
 import org.eclipse.dirigible.tests.IDE;
 import org.eclipse.dirigible.tests.framework.HtmlElementType;
 import org.junit.jupiter.api.Test;
@@ -30,8 +30,7 @@ class AirflowPerspectiveIT extends UserInterfaceIntegrationTest {
         // expected to open https://httpbin.org
         ide.openPath("/services/web/ide-airflow/index.html");
 
-        // TODO uncomment the following line once HtmlElementType.HEADER2 is released in Dirigible
-        // browser.assertElementExistsByTypeAndTextPattern(HtmlElementType.HEADER2, "httpbin");
-        browser.assertElementExistsByTypeAndText(HtmlElementType.ANCHOR, "Send email to the developer");
+        browser.assertElementExistsByTypeAndContainsText(HtmlElementType.HEADER2, "httpbin.org");
+        //        browser.assertElementExistsByTypeAndText(HtmlElementType.ANCHOR, "Send email to the developer");
     }
 }
