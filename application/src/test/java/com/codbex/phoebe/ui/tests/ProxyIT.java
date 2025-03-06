@@ -11,8 +11,6 @@
 package com.codbex.phoebe.ui.tests;
 
 import com.codbex.phoebe.cfg.AppConfig;
-import com.codbex.phoebe.ui.IntegrationTest;
-import org.eclipse.dirigible.tests.IDE;
 import org.eclipse.dirigible.tests.restassured.RestAssuredExecutor;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 
-class ProxyIT extends IntegrationTest {
+class ProxyIT extends PhoebeIntegrationTest {
 
     private static final String AIRFLOW_PROXY_PATH = "/services/airflow";
 
@@ -30,9 +28,6 @@ class ProxyIT extends IntegrationTest {
 
     @Autowired
     private RestAssuredExecutor restAssuredExecutor;
-
-    @Autowired
-    private IDE ide;
 
     @Test
     void textProxyPath() {

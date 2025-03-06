@@ -10,20 +10,16 @@
  */
 package com.codbex.phoebe.ui.tests;
 
-import org.eclipse.dirigible.tests.IDE;
 import org.eclipse.dirigible.tests.framework.HtmlElementType;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 
-class HomePageIT extends UserInterfaceIntegrationTest {
-
-    @Autowired
-    private IDE ide;
+class HomePageIT extends PhoebeIntegrationTest {
 
     @Test
     void testOpenHomepage() {
         ide.openHomePage();
 
+        browser.assertElementExistsByTypeAndText(HtmlElementType.SPAN, "codbex");
         browser.assertElementExistsByTypeAndText(HtmlElementType.HEADER3, "Welcome to Phoebe");
     }
 }
