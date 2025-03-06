@@ -11,19 +11,14 @@
 package com.codbex.phoebe.ui.tests;
 
 import com.codbex.phoebe.cfg.AppConfig;
-import org.eclipse.dirigible.tests.IDE;
 import org.eclipse.dirigible.tests.framework.HtmlElementType;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 
-class AirflowPerspectiveIT extends UserInterfaceIntegrationTest {
+class AirflowPerspectiveIT extends PhoebeIntegrationTest {
 
     static {
         AppConfig.AIRFLOW_URL.setValues("http://httpbin.org");
     }
-
-    @Autowired
-    private IDE ide;
 
     @Test
     void testPerspective() {
