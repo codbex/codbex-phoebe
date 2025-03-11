@@ -9,13 +9,14 @@
  * SPDX-FileCopyrightText: 2022 codbex or an codbex affiliate company and contributors
  * SPDX-License-Identifier: EPL-2.0
  */
-export function getView() {
-	return {
-		id: "airflow",
-		name: "Airflow",
-		factory: "frame",
-		region: "bottom",
-		label: "Airflow",
-		link: "../ide-airflow/airflow.html"
-	};
+const viewData = {
+	id: 'airflow',
+	region: 'bottom',
+	label: 'Airflow',
+	lazyLoad: true,
+	autoFocusTab: false,
+	path: '/services/web/ide-airflow/airflow.html'
+};
+if (typeof exports !== 'undefined') {
+	exports.getView = () => viewData;
 }

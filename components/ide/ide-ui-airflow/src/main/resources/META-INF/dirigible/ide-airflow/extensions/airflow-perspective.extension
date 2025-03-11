@@ -1,1 +1,5 @@
-{"module":"ide-airflow/services/airflow-perspective.js","extensionPoint":"ide-perspective","description":"Airflow Perspective"}
+{
+    "module":"ide-airflow/services/airflow-perspective.js",
+    "extensionPoint":"platform-perspectives",
+    "description":"Airflow Perspective"
+}

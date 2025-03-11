@@ -10,16 +10,12 @@
  * SPDX-License-Identifier: EPL-2.0
  */
 const perspectiveData = {
-	id: "airflow",
-	name: "Airflow",
-	link: "../ide-airflow/index.html",
-	order: "101",
-	image: "airflow", // deprecated
-	icon: "../ide-airflow/images/airflow.svg",
+	id: 'airflow',
+	label: 'Airflow',
+	path: '/services/web/ide-airflow/index.html',
+	icon: '/services/web/ide-airflow/images/airflow.svg',
+	order: 110,
 };
-
 if (typeof exports !== 'undefined') {
-	exports.getPerspective = function () {
-		return perspectiveData;
-	}
+	exports.getPerspective = () => perspectiveData;
 }

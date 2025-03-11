@@ -19,6 +19,7 @@ class HomePageIT extends PhoebeIntegrationTest {
     void testOpenHomepage() {
         ide.openHomePage();
 
+        browser.assertElementExistsByTypeAndText(HtmlElementType.SPAN, "Phoebe");
         browser.assertElementExistsByTypeAndText(HtmlElementType.HEADER3, "Welcome to Phoebe");
     }
 }
