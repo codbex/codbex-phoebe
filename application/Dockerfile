@@ -2,8 +2,9 @@ FROM apache/airflow:2.10.4
 
 USER root
 
-RUN apt-get install -y wget git
-
+RUN apt-get update && \
+    apt-get install -y git && \
+    apt-get install -y wget
 
 # Copy ttyd binary
 COPY ./ttyd_linux.x86_64_1.6.0 /usr/local/bin/ttyd
