@@ -40,7 +40,7 @@ RUN mkdir -p /opt/airflow/codbex && \
 USER airflow
 
 # test ttyd
-RUN ttyd --version
+RUN /usr/local/bin/ttyd --version
 
 # Copy your Spring Boot application JAR into the container
 COPY ./target/codbex-phoebe-[0-9]*.jar /opt/airflow/codbex/codbex-phoebe.jar
