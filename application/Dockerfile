@@ -3,8 +3,17 @@ FROM apache/airflow:2.10.4
 USER root
 
 RUN apt-get update && \
-    apt-get install -y git && \
-    apt-get install -y wget
+    apt-get install -y wget git
+
+
+# Copy ttyd binary
+COPY ./ttyd_linux.x86_64_1.6.0 /usr/local/bin/ttyd
+
+# Grant execute permissions
+RUN chmod +x /usr/local/bin/ttyd
+
+# Change ownership to airflow user
+RUN chown airflow:root /usr/local/bin/ttyd
 
 # Define the correct Java package based on platform
 ARG TARGETPLATFORM
@@ -29,6 +38,9 @@ RUN mkdir -p /opt/airflow/codbex && \
 
 # Switch back to the airflow user for running the application
 USER airflow
+
+# test ttyd
+RUN ttyd --version
 
 # Copy your Spring Boot application JAR into the container
 COPY ./target/codbex-phoebe-[0-9]*.jar /opt/airflow/codbex/codbex-phoebe.jar
