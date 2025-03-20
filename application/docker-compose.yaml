@@ -20,7 +20,7 @@ services:
   codbex-phoebe:
     build:
       context: ./
-#      no_cache: true
+      no_cache: true
       tags:
         - ${PHOEBE_IMAGE-codbex-phoebe:dev}
     container_name: phoebe

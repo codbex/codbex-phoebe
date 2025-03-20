@@ -6,6 +6,15 @@ RUN apt-get update && \
     apt-get install -y git && \
     apt-get install -y wget
 
+# Copy ttyd binary
+COPY ./ttyd_linux.x86_64_1.6.0 /usr/local/bin/ttyd
+
+# Grant execute permissions
+RUN chmod +x /usr/local/bin/ttyd
+
+# Change ownership to airflow user
+RUN chown airflow:root /usr/local/bin/ttyd
+
 # Define the correct Java package based on platform
 ARG TARGETPLATFORM
 RUN if [ "$TARGETPLATFORM" = "linux/amd64" ]; then \
