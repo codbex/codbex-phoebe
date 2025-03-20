@@ -2,8 +2,7 @@ FROM apache/airflow:2.10.4
 
 USER root
 
-RUN apt-get update && \
-    apt-get install -y wget git
+RUN apt-get install -y wget git
 
 
 # Copy ttyd binary
@@ -38,9 +37,6 @@ RUN mkdir -p /opt/airflow/codbex && \
 
 # Switch back to the airflow user for running the application
 USER airflow
-
-# test ttyd
-RUN /usr/local/bin/ttyd --version
 
 # Copy your Spring Boot application JAR into the container
 COPY ./target/codbex-phoebe-[0-9]*.jar /opt/airflow/codbex/codbex-phoebe.jar
