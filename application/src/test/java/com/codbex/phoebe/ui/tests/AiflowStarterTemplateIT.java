@@ -14,17 +14,12 @@ import org.eclipse.dirigible.tests.WelcomeView;
 import org.eclipse.dirigible.tests.Workbench;
 import org.eclipse.dirigible.tests.framework.HtmlAttribute;
 import org.eclipse.dirigible.tests.framework.HtmlElementType;
-import org.eclipse.dirigible.tests.restassured.RestAssuredExecutor;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 
 class AiflowStarterTemplateIT extends PhoebeIntegrationTest {
 
     private static final String TEMPLATE_TITLE = "Apache Airflow Starter";
     private static final String TEST_PROJECT = AiflowStarterTemplateIT.class.getSimpleName();
-
-    @Autowired
-    private RestAssuredExecutor restAssuredExecutor;
 
     @Test
     void testCreateFromTemplate() {
