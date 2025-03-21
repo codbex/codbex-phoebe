@@ -9,7 +9,7 @@
  * SPDX-FileCopyrightText: 2025 codbex or an codbex affiliate company and contributors
  * SPDX-License-Identifier: EPL-2.0
  */
-const perspectiveData = {
+const viewData = {
 	id: 'airflow',
 	label: 'Airflow',
 	path: '/services/web/ide-airflow/index.html',
@@ -18,5 +18,5 @@ const perspectiveData = {
 	order: 110,
 };
 if (typeof exports !== 'undefined') {
-	exports.getPerspective = () => perspectiveData;
+	exports.getPerspective = () => viewData;
 }
