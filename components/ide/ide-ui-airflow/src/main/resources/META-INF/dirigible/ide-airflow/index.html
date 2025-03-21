@@ -6,24 +6,21 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title config-title></title>
 		<link rel="icon" sizes="any" href="data:;base64,iVBORw0KGgo=" />
-		<script type="text/javascript" src="/services/web/ide-airflow/services/airflow-perspective.js"></script>
-		<script type="text/javascript" src="/services/js/platform-core/services/loader.js?id=perspective-js"></script>
-		<link type="text/css" rel="stylesheet" href="/services/js/platform-core/services/loader.js?id=perspective-css" />
+		<script type="text/javascript" src="/services/web/ide-airflow/configs/airflow-perspective.js"></script>
+		<script type="text/javascript" src="/services/js/platform-core/services/loader.js?id=view-js"></script>
+		<link type="text/css" rel="stylesheet" href="/services/js/platform-core/services/loader.js?id=view-css" />
 	</head>
 
 	<body>
-		<layout config="::layoutConfig"></layout>
+		<iframe class="bk-fill-parent" ng-src="::airflowSrc"></iframe>
 		<script type="text/javascript">
-			angular.module('airflow', ['platformView', 'platformLayout', 'blimpKit'])
-                .controller('AirflowController', ($scope) => {
-                    $scope.layoutConfig = {
-                        views: ['airflow'],
-						layoutSettings: {
-							hideCenterPane: false,
-							leftPaneMinSize: 348,
-						},
-                    };
-                });
+			angular.module('airflow', ['platformView', 'blimpKit']).controller('AirflowController', ($scope) => {
+				const protocol = window.location.protocol;
+				const host = window.location.hostname;
+				const port = window.location.port;
+
+				$scope.airflowSrc = (port === '' ? `${protocol}//${host}` : `${protocol}//${host}:${port}`) + '/services/airflow';
+			});
 		</script>
 		<theme></theme>
 	</body>
