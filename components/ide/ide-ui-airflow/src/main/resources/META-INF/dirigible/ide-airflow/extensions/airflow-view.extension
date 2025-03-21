@@ -1,5 +1,0 @@
-{
-    "module":"ide-airflow/services/airflow-view.js",
-    "extensionPoint":"platform-views",
-    "description":"Airflow View"
-}
