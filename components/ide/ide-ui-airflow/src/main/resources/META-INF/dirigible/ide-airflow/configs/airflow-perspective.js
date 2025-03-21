@@ -14,7 +14,6 @@ const perspectiveData = {
 	label: 'Airflow',
 	path: '/services/web/ide-airflow/index.html',
 	lazyLoad: true,
-	autoFocusTab: false,
 	icon: '/services/web/ide-airflow/images/airflow.svg',
 	order: 110,
 };
