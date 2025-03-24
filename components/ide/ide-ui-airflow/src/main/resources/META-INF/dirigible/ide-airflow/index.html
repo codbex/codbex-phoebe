@@ -1,31 +1,28 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="airflow" ng-controller="AirflowController" xmlns="http://www.w3.org/1999/xhtml">
 
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title config-title></title>
-		<link rel="icon" sizes="any" href="data:;base64,iVBORw0KGgo=" />
-		<script type="text/javascript" src="/services/web/ide-airflow/services/airflow-perspective.js"></script>
-		<script type="text/javascript" src="/services/js/platform-core/services/loader.js?id=perspective-js"></script>
-		<link type="text/css" rel="stylesheet" href="/services/js/platform-core/services/loader.js?id=perspective-css" />
-	</head>
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title config-title></title>
+    <link href="data:;base64,iVBORw0KGgo=" rel="icon" sizes="any"/>
+    <script src="/services/web/ide-airflow/configs/airflow-perspective.js" type="text/javascript"></script>
+    <script src="/services/js/platform-core/services/loader.js?id=view-js" type="text/javascript"></script>
+    <link href="/services/js/platform-core/services/loader.js?id=view-css" rel="stylesheet" type="text/css"/>
+</head>
 
-	<body>
-		<layout config="::layoutConfig"></layout>
-		<script type="text/javascript">
-			angular.module('airflow', ['platformView', 'platformLayout', 'blimpKit'])
-                .controller('AirflowController', ($scope) => {
-                    $scope.layoutConfig = {
-                        views: ['airflow'],
-						layoutSettings: {
-							hideCenterPane: false,
-							leftPaneMinSize: 348,
-						},
-                    };
-                });
-		</script>
-		<theme></theme>
-	</body>
+<body>
+<iframe class="bk-fill-parent" ng-src="{{ airflowSrc }}"></iframe>
+<script type="text/javascript">
+    angular.module('airflow', ['platformView', 'blimpKit']).controller('AirflowController', ($scope) => {
+        const protocol = window.location.protocol;
+        const host = window.location.hostname;
+        const port = window.location.port;
+
+        $scope.airflowSrc = (port === '' ? `${protocol}//${host}` : `${protocol}//${host}:${port}`) + '/services/airflow';
+    });
+</script>
+<theme></theme>
+</body>
 
 </html>
