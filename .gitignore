@@ -1,7 +1,6 @@
 target/
 bin/
 log/
-application/build/
 .idea
 .history
 .vscode
@@ -29,5 +28,5 @@ dist/
 *.log
 derby.log
 **/build
-
-ttyd.sh
+**/build/reports
+**/ttyd.sh
