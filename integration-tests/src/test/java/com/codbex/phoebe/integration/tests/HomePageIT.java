@@ -8,11 +8,18 @@
  * SPDX-FileCopyrightText: 2022 codbex or an codbex affiliate company and contributors
  * SPDX-License-Identifier: EPL-2.0
  */
-package com.codbex.phoebe.ui.tests;
+package com.codbex.phoebe.integration.tests;
 
-import org.eclipse.dirigible.tests.UserInterfaceIntegrationTest;
-import org.springframework.context.annotation.Import;
+import org.eclipse.dirigible.tests.framework.HtmlElementType;
+import org.junit.jupiter.api.Test;
 
-@Import(TestConfigurations.class)
-public abstract class PhoebeIntegrationTest extends UserInterfaceIntegrationTest {
+class HomePageIT extends PhoebeIntegrationTest {
+
+    @Test
+    void testOpenHomepage() {
+        ide.openHomePage();
+
+        browser.assertElementExistsByTypeAndText(HtmlElementType.SPAN, "Phoebe");
+        browser.assertElementExistsByTypeAndText(HtmlElementType.HEADER3, "Welcome to Phoebe");
+    }
 }

@@ -8,7 +8,7 @@
  * SPDX-FileCopyrightText: 2022 codbex or an codbex affiliate company and contributors
  * SPDX-License-Identifier: EPL-2.0
  */
-package com.codbex.phoebe.ui.tests;
+package com.codbex.phoebe.integration.tests;
 
 import com.codbex.phoebe.cfg.AppConfig;
 import org.eclipse.dirigible.tests.restassured.RestAssuredExecutor;
