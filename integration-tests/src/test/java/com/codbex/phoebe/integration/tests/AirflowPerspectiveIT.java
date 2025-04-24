@@ -11,7 +11,7 @@
 package com.codbex.phoebe.integration.tests;
 
 import com.codbex.phoebe.cfg.AppConfig;
-import org.eclipse.dirigible.tests.framework.HtmlElementType;
+import org.eclipse.dirigible.tests.framework.browser.HtmlElementType;
 import org.junit.jupiter.api.Test;
 
 class AirflowPerspectiveIT extends PhoebeIntegrationTest {

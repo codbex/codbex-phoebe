@@ -11,7 +11,7 @@
 package com.codbex.phoebe.integration.tests;
 
 import com.codbex.phoebe.cfg.AppConfig;
-import org.eclipse.dirigible.tests.restassured.RestAssuredExecutor;
+import org.eclipse.dirigible.tests.framework.restassured.RestAssuredExecutor;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 

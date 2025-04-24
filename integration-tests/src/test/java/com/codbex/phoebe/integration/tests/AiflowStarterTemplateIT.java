@@ -10,10 +10,10 @@
  */
 package com.codbex.phoebe.integration.tests;
 
-import org.eclipse.dirigible.tests.WelcomeView;
-import org.eclipse.dirigible.tests.Workbench;
-import org.eclipse.dirigible.tests.framework.HtmlAttribute;
-import org.eclipse.dirigible.tests.framework.HtmlElementType;
+import org.eclipse.dirigible.tests.framework.browser.HtmlAttribute;
+import org.eclipse.dirigible.tests.framework.browser.HtmlElementType;
+import org.eclipse.dirigible.tests.framework.ide.WelcomeView;
+import org.eclipse.dirigible.tests.framework.ide.Workbench;
 import org.junit.jupiter.api.Test;
 
 class AiflowStarterTemplateIT extends PhoebeIntegrationTest {
