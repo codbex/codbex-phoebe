@@ -8,7 +8,7 @@ Web IDE for [Apache Airflow](https://airflow.apache.org/) workflows development.
 
 <!-- TOC -->
 
-* [codbex-phoebe](#codbex-phoebe)
+* [Phoebe by codbex](#phoebe-by-codbex)
     * [Description](#description)
     * [Run steps](#run-steps)
         * [Start using Docker and released image](#start-using-docker-and-released-image)
@@ -20,6 +20,7 @@ Web IDE for [Apache Airflow](https://airflow.apache.org/) workflows development.
             * [Prerequisites](#prerequisites)
             * [Start the application](#start-the-application)
         * [Multi-platform Docker build](#multi-platform-docker-build)
+            * [Spring profiles](#spring-profiles)
         * [Run unit tests](#run-unit-tests)
         * [Run integration tests](#run-integration-tests)
         * [Run all tests](#run-all-tests)
@@ -228,6 +229,12 @@ docker pull "ghcr.io/$GITHUB_USERNAME/$IMAGE" --platform linux/amd64
 # linux/arm64
 docker pull "ghcr.io/$GITHUB_USERNAME/$IMAGE" --platform linux/arm64
 ```
+
+#### Spring profiles
+
+- Eclipse Dirigible profiles
+  To activate Eclipse Dirigible, you have to add profiles `common` and `app-default` explicitly.<br>
+  Example for profile `snowflake`: `SPRING_PROFILES_ACTIVE=common,snowflake,app-default`
 
 ---
 
