@@ -16,14 +16,14 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.notNullValue;
 
 class ProxyIT extends PhoebeIntegrationTest {
 
     private static final String AIRFLOW_PROXY_PATH = "/services/airflow";
 
     static {
-        AppConfig.AIRFLOW_URL.setValues("https://httpbin.org");
+        AppConfig.AIRFLOW_URL.setValues("https://api.ipify.org");
     }
 
     @Autowired
@@ -31,11 +31,11 @@ class ProxyIT extends PhoebeIntegrationTest {
 
     @Test
     void textProxyPath() {
-        // expected to open https://httpbin.org/get
+        // expected to open https://api.ipify.org?format=json
         restAssuredExecutor.execute(() -> given().when()
-                                                 .get(AIRFLOW_PROXY_PATH + "/get")
+                                                 .get(AIRFLOW_PROXY_PATH + "?format=json")
                                                  .then()
                                                  .statusCode(200)
-                                                 .body("headers.Host", equalTo("httpbin.org")));
+                                                 .body("ip", notNullValue()));
     }
 }
