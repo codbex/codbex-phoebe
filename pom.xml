@@ -65,6 +65,11 @@
     </modules>
 
     <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
+            <version>3.4.6</version>
+        </dependency>
 
         <!-- Platform -->
         <dependency>
