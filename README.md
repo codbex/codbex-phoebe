@@ -147,7 +147,6 @@ __Prerequisites:__ [Build the project jar](#build-the-project-jar)
     -v "$AIRFLOW_WORK_DIR/dags:/opt/airflow/dags" \
     -v "$AIRFLOW_WORK_DIR/logs:/opt/airflow/logs" \
     -v "$AIRFLOW_WORK_DIR/config:/opt/airflow/config" \
-    -v "./application/webserver_config.py:/opt/airflow/webserver_config.py" \
     -e AIRFLOW__CORE__LOAD_EXAMPLES=False \
     -e _AIRFLOW_DB_MIGRATE=true \
     -e AIRFLOW__SCHEDULER__DAG_DIR_LIST_INTERVAL=5 \
@@ -155,6 +154,7 @@ __Prerequisites:__ [Build the project jar](#build-the-project-jar)
     -e AIRFLOW__DATABASE__SQL_ALCHEMY_CONN="postgresql+psycopg2://$PHOEBE_AIRFLOW_POSTGRES_USER:$PHOEBE_AIRFLOW_POSTGRES_PASS@host.docker.internal:5432/$PHOEBE_AIRFLOW_POSTGRES_DB" \
     -d apache/airflow:2.10.4 standalone
     ```
+
 - Ensure Airflow is started at [http://localhost:8080](http://localhost:8080)
 
 #### Start the application
