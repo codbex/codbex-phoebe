@@ -17,8 +17,8 @@
     <dependencies>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-gateway-mvc</artifactId>
-            <version>4.2.3</version>
+            <artifactId>spring-cloud-starter-gateway-server-webmvc</artifactId>
+            <version>4.3.0</version>
         </dependency>
 
         <dependency>
