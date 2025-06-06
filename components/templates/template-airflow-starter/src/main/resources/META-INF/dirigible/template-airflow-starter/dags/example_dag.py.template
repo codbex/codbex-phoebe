@@ -10,7 +10,7 @@ def print_hello_again():
 
 with DAG(
     dag_id="${dagId}",
-    schedule_interval=None,  # Manually triggered
+    schedule=None,  # Manually triggered
     start_date=datetime(2024, 1, 1),
     catchup=False,
     tags=["example"],

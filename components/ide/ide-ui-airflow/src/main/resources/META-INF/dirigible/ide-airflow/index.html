@@ -19,7 +19,13 @@
         const host = window.location.hostname;
         const port = window.location.port;
 
-        $scope.airflowSrc = (port === '' ? `${protocol}//${host}` : `${protocol}//${host}:${port}`) + '/services/airflow';
+        console.log(`host: ${host}`);
+        console.log(`port: ${port}`);
+        console.log(`protocol: ${protocol}`);
+
+        const airflowSrc = (port === '' ? `${protocol}//${host}` : `${protocol}//${host}:${port}`) + '/services/airflow/';
+        console.log(`airflowSrc: ${airflowSrc}`);
+        $scope.airflowSrc = airflowSrc;
     });
 </script>
 <theme></theme>
