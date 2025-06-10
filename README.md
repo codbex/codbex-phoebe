@@ -143,16 +143,17 @@ __Prerequisites:__ [Build the project jar](#build-the-project-jar)
     docker rm -f airflow
     
     docker run --name airflow  \
-    -p 8080:8080 \
-    -v "$AIRFLOW_WORK_DIR/dags:/opt/airflow/dags" \
-    -v "$AIRFLOW_WORK_DIR/logs:/opt/airflow/logs" \
-    -v "$AIRFLOW_WORK_DIR/config:/opt/airflow/config" \
-    -e AIRFLOW__CORE__LOAD_EXAMPLES=False \
-    -e _AIRFLOW_DB_MIGRATE=true \
-    -e AIRFLOW__SCHEDULER__DAG_DIR_LIST_INTERVAL=5 \
-    -e AIRFLOW__CORE__EXECUTOR=LocalExecutor \
-    -e AIRFLOW__DATABASE__SQL_ALCHEMY_CONN="postgresql+psycopg2://$PHOEBE_AIRFLOW_POSTGRES_USER:$PHOEBE_AIRFLOW_POSTGRES_PASS@host.docker.internal:5432/$PHOEBE_AIRFLOW_POSTGRES_DB" \
-    -d apache/airflow:2.10.4 standalone
+       -p 8080:8080 \
+       -v "$AIRFLOW_WORK_DIR/dags:/opt/airflow/dags" \
+       -v "$AIRFLOW_WORK_DIR/logs:/opt/airflow/logs" \
+       -v "$AIRFLOW_WORK_DIR/config:/opt/airflow/config" \
+       -e AIRFLOW__CORE__LOAD_EXAMPLES=False \
+       -e _AIRFLOW_DB_MIGRATE=true \
+       -e AIRFLOW__SCHEDULER__DAG_DIR_LIST_INTERVAL=5 \
+       -e AIRFLOW__CORE__EXECUTOR=LocalExecutor \
+       -e AIRFLOW__CORE__SIMPLE_AUTH_MANAGER_ALL_ADMINS=True \
+       -e AIRFLOW__DATABASE__SQL_ALCHEMY_CONN="postgresql+psycopg2://$PHOEBE_AIRFLOW_POSTGRES_USER:$PHOEBE_AIRFLOW_POSTGRES_PASS@host.docker.internal:5432/$PHOEBE_AIRFLOW_POSTGRES_DB" \
+       -d apache/airflow:3.0.1 standalone
     ```
 
 - Ensure Airflow is started at [http://localhost:8080](http://localhost:8080)
@@ -171,7 +172,7 @@ __Prerequisites:__ [Build the project jar](#build-the-project-jar)
         --add-opens=java.base/java.lang=ALL-UNNAMED \
         --add-opens=java.base/java.lang.reflect=ALL-UNNAMED \
         --add-opens=java.base/java.nio=ALL-UNNAMED \
-        -jar application/target/*-application-*.jar
+        -jar application/target/*executable*.jar
     ```
 
 - Start the application **in debug** with debug port `8000`
@@ -185,7 +186,7 @@ __Prerequisites:__ [Build the project jar](#build-the-project-jar)
         --add-opens=java.base/java.lang=ALL-UNNAMED \
         --add-opens=java.base/java.lang.reflect=ALL-UNNAMED \
         --add-opens=java.base/java.nio=ALL-UNNAMED \
-        -jar application/target/*-application-*.jar
+        -jar application/target/*executable*.jar
     ```
 
 ---
