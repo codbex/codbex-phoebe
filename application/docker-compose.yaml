@@ -29,8 +29,10 @@ services:
       - PHOEBE_AIRFLOW_POSTGRES_PASS=${PHOEBE_AIRFLOW_POSTGRES_PASS:-postgres}
       - PHOEBE_AIRFLOW_POSTGRES_HOST=${PHOEBE_AIRFLOW_POSTGRES_HOST:-postgres}
       - PHOEBE_AIRFLOW_POSTGRES_DB=${PHOEBE_AIRFLOW_POSTGRES_DB:-postgres}
+#      - PHOEBE_AIRFLOW_URL=https://httpbin.org # change Apache Airflow with httpbin for testing
     ports:
       - "80:80"
+#      - "8080:8080" # expose Apache Airflow
     depends_on:
       - postgres
     networks:
