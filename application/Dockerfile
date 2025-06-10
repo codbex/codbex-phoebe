@@ -1,4 +1,4 @@
-FROM apache/airflow:2.10.4
+FROM apache/airflow:3.0.1
 
 USER root
 
@@ -47,11 +47,6 @@ EXPOSE 80
 
 COPY ./start.sh /opt/airflow/codbex/start.sh
 
-COPY ./webserver_config.py /opt/airflow
-# COPY application/docker/start.sh /opt/airflow/codbex/start.sh
-#
-# COPY application/docker/webserver_config.py /opt/airflow
-
 # Phoebe env variables
 ENV PHOEBE_AIRFLOW_POSTGRES_USER="postgres"
 ENV PHOEBE_AIRFLOW_POSTGRES_PASS="postgres"
@@ -63,6 +58,13 @@ ENV PHOEBE_AIRFLOW_WORK_DIR="/opt/airflow"
 ENV AIRFLOW__CORE__EXECUTOR="LocalExecutor"
 ENV AIRFLOW__CORE__LOAD_EXAMPLES="False"
 ENV _AIRFLOW_DB_MIGRATE="true"
-ENV AIRFLOW__SCHEDULER__DAG_DIR_LIST_INTERVAL="5"
+ENV AIRFLOW__CORE__SIMPLE_AUTH_MANAGER_ALL_ADMINS=True
+# 5 seconds
+ENV AIRFLOW__DAG_PROCESSOR__REFRESH_INTERVAL="5"
+
+# access control configurations
+# ENV AIRFLOW__API__ACCESS_CONTROL_ALLOW_ORIGINS=*
+# ENV AIRFLOW__API__ACCESS_CONTROL_ALLOW_HEADERS=*
+# ENV AIRFLOW__API__ACCESS_CONTROL_ALLOW_METHODS=*
 
 ENTRYPOINT ["/opt/airflow/codbex/start.sh"]

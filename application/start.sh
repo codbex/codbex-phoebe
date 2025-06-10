@@ -7,8 +7,11 @@ echo "Current user: $(whoami)"
 export AIRFLOW__CORE__SQL_ALCHEMY_CONN="postgresql+psycopg2://${PHOEBE_AIRFLOW_POSTGRES_USER}:${PHOEBE_AIRFLOW_POSTGRES_USER}@${PHOEBE_AIRFLOW_POSTGRES_HOST}/${PHOEBE_AIRFLOW_POSTGRES_DB}"
 echo AIRFLOW__CORE__SQL_ALCHEMY_CONN: $AIRFLOW__CORE__SQL_ALCHEMY_CONN
 
+echo "Airflow version:"
+/entrypoint airflow version
+
 echo "Starting Airflow..."
-/usr/bin/dumb-init -- /entrypoint standalone &
+/entrypoint airflow standalone &
 
 # Start the Java application
 cd /opt/airflow/codbex
