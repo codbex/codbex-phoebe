@@ -1,4 +1,4 @@
-name: Build
+name: Build - Platform
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  main:
+  build:
     uses: codbex/codbex-infra/.github/workflows/platform-build.yaml@main
     with:
       platform-name: codbex-phoebe
