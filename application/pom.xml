@@ -16,9 +16,13 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.apache.httpcomponents.client5</groupId>
+            <artifactId>httpclient5</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-gateway-mvc</artifactId>
-            <version>4.2.2</version>
+            <version>4.2.3</version>
         </dependency>
 
         <dependency>
@@ -29,7 +33,6 @@
             <groupId>com.codbex.phoebe</groupId>
             <artifactId>codbex-phoebe-welcome</artifactId>
         </dependency>
-
         <!-- Core -->
         <dependency>
             <groupId>org.eclipse.dirigible</groupId>
