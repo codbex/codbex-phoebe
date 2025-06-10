@@ -52,6 +52,27 @@ It also helps you to easily start your work using the defined Apache Airflow sta
 
 ## Run steps
 
+__Prerequisites:__
+
+- Export the following variables before executing the steps
+  ```shell
+  export GIT_REPO_FOLDER='<path-to-the-git-repo>'
+  
+  export PHOEBE_CONTAINER_NAME='phoebe'
+  export DEV_IMAGE='codbex-phoebe:dev'
+  export PHOEBE_IMAGE='ghcr.io/codbex/codbex-phoebe:latest'
+  
+  export PHOEBE_AIRFLOW_POSTGRES_USER="postgres"
+  export PHOEBE_AIRFLOW_POSTGRES_PASS="postgres"
+  export PHOEBE_AIRFLOW_POSTGRES_DB="postgres"
+  
+  export AIRFLOW_WORK_DIR="$HOME/airflow_work"
+  export PHOEBE_AIRFLOW_WORK_DIR="$AIRFLOW_WORK_DIR"
+
+  export GITHUB_USERNAME='<your-github-user>'
+
+  ```
+
 ### Start using Docker and released image
 
 #### Start PostgreSQL
@@ -59,10 +80,6 @@ It also helps you to easily start your work using the defined Apache Airflow sta
 The instance which will be used for Airflow DB or used existing DB instance.
 
 ```shell
-export PHOEBE_AIRFLOW_POSTGRES_USER="postgres"
-export PHOEBE_AIRFLOW_POSTGRES_PASS="postgres"
-export PHOEBE_AIRFLOW_POSTGRES_DB="postgres"
-
 docker rm -f postgres
 
 docker run --name postgres \
@@ -71,24 +88,24 @@ docker run --name postgres \
   -e POSTGRES_DB="$PHOEBE_AIRFLOW_POSTGRES_DB" \
   -p 5432:5432 \
   -d postgres:13
+  
 ```
 
 #### Start Docker image
 
 ```shell
-export PHOEBE_IMAGE='ghcr.io/codbex/codbex-phoebe:latest'
-
-docker rm -f phoebe
+docker rm -f "$PHOEBE_CONTAINER_NAME"
 
 docker pull "$PHOEBE_IMAGE"
 
-docker run --name phoebe  \
+docker run --name "$PHOEBE_CONTAINER_NAME"  \
     -p 80:80 \
     -e PHOEBE_AIRFLOW_POSTGRES_USER="$PHOEBE_AIRFLOW_POSTGRES_USER" \
     -e PHOEBE_AIRFLOW_POSTGRES_PASS="$PHOEBE_AIRFLOW_POSTGRES_PASS" \
     -e PHOEBE_AIRFLOW_POSTGRES_HOST="host.docker.internal" \
     -e PHOEBE_AIRFLOW_POSTGRES_DB="$PHOEBE_AIRFLOW_POSTGRES_DB" \
     $PHOEBE_IMAGE
+    
 ```
 
 ---
@@ -96,11 +113,10 @@ docker run --name phoebe  \
 ### Build the project jar
 
 ```shell
-export GIT_REPO_FOLDER='<path-to-the-git-repo>'
-
 cd $GIT_REPO_FOLDER
 
 mvn -T 1C clean install -P quick-build
+
 ```
 
 ---
@@ -110,16 +126,16 @@ mvn -T 1C clean install -P quick-build
 __Prerequisites:__ [Build the project jar](#build-the-project-jar)
 
   ```shell
-  export GIT_REPO_FOLDER='<path-to-the-git-repo>'
-
   cd "$GIT_REPO_FOLDER/application"
   
   # cleanup
+  docker rm -f "$PHOEBE_CONTAINER_NAME"
   docker compose down -v
   
   # To force rebuild add --build
   # Needed when you modify something in Dockerfile or in the application
   docker compose up --build
+  
   ```
 
 --- 
@@ -132,13 +148,7 @@ __Prerequisites:__ [Build the project jar](#build-the-project-jar)
 
 - Start Airflow locally
     ```shell
-    export GIT_REPO_FOLDER='<path-to-the-git-repo>'
     cd "$GIT_REPO_FOLDER"
-  
-    export AIRFLOW_WORK_DIR="$HOME/airflow_work"
-    export PHOEBE_AIRFLOW_POSTGRES_USER="postgres"
-    export PHOEBE_AIRFLOW_POSTGRES_PASS="postgres"
-    export PHOEBE_AIRFLOW_POSTGRES_DB="postgres"
     
     docker rm -f airflow
     
@@ -164,29 +174,27 @@ __Prerequisites:__ [Build the project jar](#build-the-project-jar)
 
 - Start the application
     ```shell
-    export GIT_REPO_FOLDER='<path-to-the-git-repo>'
     cd "$GIT_REPO_FOLDER"
   
-    export PHOEBE_AIRFLOW_WORK_DIR="$AIRFLOW_WORK_DIR"
     java \
         --add-opens=java.base/java.lang=ALL-UNNAMED \
         --add-opens=java.base/java.lang.reflect=ALL-UNNAMED \
         --add-opens=java.base/java.nio=ALL-UNNAMED \
         -jar application/target/*executable*.jar
+  
     ```
 
 - Start the application **in debug** with debug port `8000`
     ```shell
-    export GIT_REPO_FOLDER='<path-to-the-git-repo>'
     cd "$GIT_REPO_FOLDER"
   
-    export PHOEBE_AIRFLOW_WORK_DIR="$AIRFLOW_WORK_DIR"
     java \
         -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=8000 \
         --add-opens=java.base/java.lang=ALL-UNNAMED \
         --add-opens=java.base/java.lang.reflect=ALL-UNNAMED \
         --add-opens=java.base/java.nio=ALL-UNNAMED \
         -jar application/target/*executable*.jar
+  
     ```
 
 ---
@@ -196,39 +204,36 @@ __Prerequisites:__ [Build the project jar](#build-the-project-jar)
 __Prerequisites:__ [Build the project jar](#build-the-project-jar)
 
 ```shell
-export GIT_REPO_FOLDER='<path-to-the-git-repo>'
-export IMAGE='codbex-phoebe:dev'
-export GITHUB_USERNAME='<your-github-user>'
-
 cd "$GIT_REPO_FOLDER/application"
 
 export DOCKER_CLI_EXPERIMENTAL=enabled
 docker buildx create --use
 
 # build image for linux/amd64
-docker buildx build --platform linux/amd64 -t $IMAGE --load .
+docker buildx build --platform linux/amd64 -t $DEV_IMAGE --load .
 
 # build image for linux/arm64
-docker buildx build --platform linux/arm64 -t $IMAGE --load .
+docker buildx build --platform linux/arm64 -t $DEV_IMAGE --load .
 
 # build images for both platforms
-docker buildx build --platform=linux/arm64,linux/amd64 -t $IMAGE -o type=image .
+docker buildx build --platform=linux/arm64,linux/amd64 -t $DEV_IMAGE -o type=image .
 
 # build multiplatform images and push them to GitHub Container Registry
 docker login ghcr.io -u "$GITHUB_USERNAME"
 
 docker buildx build \
     --platform linux/amd64,linux/arm64 \
-    -t "ghcr.io/$GITHUB_USERNAME/$IMAGE" \
+    -t "ghcr.io/$GITHUB_USERNAME/$DEV_IMAGE" \
     --push .
     
 ## pull images locally
 
 # linux/amd64
-docker pull "ghcr.io/$GITHUB_USERNAME/$IMAGE" --platform linux/amd64
+docker pull "ghcr.io/$GITHUB_USERNAME/$DEV_IMAGE" --platform linux/amd64
 
 # linux/arm64
-docker pull "ghcr.io/$GITHUB_USERNAME/$IMAGE" --platform linux/arm64
+docker pull "ghcr.io/$GITHUB_USERNAME/$DEV_IMAGE" --platform linux/arm64
+
 ```
 
 #### Spring profiles
@@ -242,10 +247,9 @@ docker pull "ghcr.io/$GITHUB_USERNAME/$IMAGE" --platform linux/arm64
 ### Run unit tests
 
 ```shell
-export GIT_REPO_FOLDER='<path-to-the-git-repo>'
-
 cd "$GIT_REPO_FOLDER"
 mvn clean install -P unit-tests
+
 ```
 
 ---
@@ -253,10 +257,9 @@ mvn clean install -P unit-tests
 ### Run integration tests
 
 ```shell
-export GIT_REPO_FOLDER='<path-to-the-git-repo>'
-
 cd "$GIT_REPO_FOLDER"
 mvn clean install -P integration-tests
+
 ```
 
 ---
@@ -264,10 +267,9 @@ mvn clean install -P integration-tests
 ### Run all tests
 
 ```shell
-export GIT_REPO_FOLDER='<path-to-the-git-repo>'
-
 cd "$GIT_REPO_FOLDER"
 mvn clean install -P tests
+
 ```
 
 ---
@@ -275,10 +277,9 @@ mvn clean install -P tests
 ### Format the code
 
 ```shell
-export GIT_REPO_FOLDER='<path-to-the-git-repo>'
-
 cd "$GIT_REPO_FOLDER"
 mvn verify -P format
+
 ```
 
 ---
@@ -307,13 +308,14 @@ Depending on the use case these configurations could be set in different ways.
     ```
 - For docker run
     ```shell
-    docker run --name phoebe  \
+    docker run --name "$PHOEBE_CONTAINER_NAME"  \
         -p 80:80 \
         -e PHOEBE_AIRFLOW_POSTGRES_USER="$PHOEBE_AIRFLOW_POSTGRES_USER" \
         -e PHOEBE_AIRFLOW_POSTGRES_PASS="$PHOEBE_AIRFLOW_POSTGRES_PASS" \
         -e PHOEBE_AIRFLOW_POSTGRES_HOST="host.docker.internal" \
         -e PHOEBE_AIRFLOW_POSTGRES_DB="$PHOEBE_AIRFLOW_POSTGRES_DB" \
         $PHOEBE_IMAGE
+  
     ```
 - When using docker compose they could be set in the `docker-compose.yml` file.
     ```yaml
