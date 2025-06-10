@@ -1,3 +1,5 @@
+# downloaded from https://airflow.apache.org/docs/apache-airflow/3.0.1/docker-compose.yaml
+
 # Licensed to the Apache Software Foundation (ASF) under one
 # or more contributor license agreements.  See the NOTICE file
 # distributed with this work for additional information
@@ -53,23 +55,12 @@ x-airflow-common:
   # build: .
   environment:
     &airflow-common-env
-    _AIRFLOW_WWW_USER_CREATE: 'false'
-    _AIRFLOW_WWW_USER_USERNAME: ${_AIRFLOW_WWW_USER_USERNAME:-airflow}
-    _AIRFLOW_WWW_USER_PASSWORD: ${_AIRFLOW_WWW_USER_PASSWORD:-airflow}
-    AUTH_ROLE_PUBLIC: Admin
-    _AUTH_ROLE_PUBLIC: Admin
-
-    AIRFLOW__AUTH_MANAGER__AUTH_ROLE_PUBLIC: Admin
-    _AIRFLOW__AUTH_MANAGER__AUTH_ROLE_PUBLIC: Admin
-
-    AIRFLOW__AUTH_MANAGER__ALLOW_ANONYMOUS_USER: 'true'
-    _AIRFLOW__AUTH_MANAGER__ALLOW_ANONYMOUS_USER: 'true'
-
-    AIRFLOW__AUTH_MANAGER__ROLE_FOR_ANONYMOUS_USER: Admin
-    _AIRFLOW__AUTH_MANAGER__ROLE_FOR_ANONYMOUS_USER: Admin
     AIRFLOW__CORE__EXECUTOR: CeleryExecutor
 #    AIRFLOW__CORE__AUTH_MANAGER: airflow.providers.fab.auth_manager.fab_auth_manager.FabAuthManager
     AIRFLOW__CORE__SIMPLE_AUTH_MANAGER_ALL_ADMINS: "True"
+    _AIRFLOW_WWW_USER_USERNAME: 'admin'
+    _AIRFLOW_WWW_USER_PASSWORD: 'admin'
+    _AIRFLOW_WWW_USER_CREATE: 'true'
     AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/airflow
     AIRFLOW__CELERY__RESULT_BACKEND: db+postgresql://airflow:airflow@postgres/airflow
     AIRFLOW__CELERY__BROKER_URL: redis://:@redis:6379/0
@@ -303,7 +294,9 @@ services:
     environment:
       <<: *airflow-common-env
       _AIRFLOW_DB_MIGRATE: 'true'
-
+      _AIRFLOW_WWW_USER_CREATE: 'true'
+      _AIRFLOW_WWW_USER_USERNAME: ${_AIRFLOW_WWW_USER_USERNAME:-airflow}
+      _AIRFLOW_WWW_USER_PASSWORD: ${_AIRFLOW_WWW_USER_PASSWORD:-airflow}
       _PIP_ADDITIONAL_REQUIREMENTS: ''
     user: "0:0"
 
