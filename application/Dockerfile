@@ -4,7 +4,13 @@ USER root
 
 RUN apt-get update && \
     apt-get install -y git && \
-    apt-get install -y wget
+    apt-get install -y wget && \
+    apt-get install -y nodejs && \
+    apt-get install -y npm
+
+# Install global npm packages
+RUN npm install -g esbuild
+RUN npm install -g typescript
 
 # Copy ttyd binary
 COPY ./ttyd_linux.x86_64_1.6.0 /usr/local/bin/ttyd
