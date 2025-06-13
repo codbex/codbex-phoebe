@@ -16,6 +16,18 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.eclipse.dirigible</groupId>
+            <artifactId>dirigible-components-resources-mxgraph</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.dirigible</groupId>
+            <artifactId>dirigible-components-ui-menu-schema</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.dirigible</groupId>
+            <artifactId>dirigible-components-ui-editor-schema</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.apache.httpcomponents.client5</groupId>
             <artifactId>httpclient5</artifactId>
         </dependency>
