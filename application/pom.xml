@@ -15,14 +15,6 @@
     <packaging>jar</packaging>
 
     <dependencies>
-        <!--        <dependency>-->
-        <!--            <groupId>org.eclipse.dirigible</groupId>-->
-        <!--            <artifactId>dirigible-components-ide-ui-schema</artifactId>-->
-        <!--        </dependency>-->
-        <!--        <dependency>-->
-        <!--            <groupId>org.eclipse.dirigible</groupId>-->
-        <!--            <artifactId>dirigible-components-ide-ui-schema-menu</artifactId>-->
-        <!--        </dependency>-->
         <dependency>
             <groupId>org.eclipse.dirigible</groupId>
             <artifactId>dirigible-components-resources-mxgraph</artifactId>
