@@ -87,7 +87,7 @@ docker run --name postgres \
   -e POSTGRES_USER="$PHOEBE_AIRFLOW_POSTGRES_USER" \
   -e POSTGRES_DB="$PHOEBE_AIRFLOW_POSTGRES_DB" \
   -p 5432:5432 \
-  -d postgres:13
+  -d postgres:16
   
 ```
 

@@ -1,6 +1,6 @@
 services:
   postgres:
-    image: postgres:${POSTGRES_IMAGE_TAG-13}
+    image: postgres:${POSTGRES_IMAGE_TAG-16}
     hostname: ${PHOEBE_AIRFLOW_POSTGRES_HOST:-postgres}
     environment:
       - POSTGRES_USER=${PHOEBE_AIRFLOW_POSTGRES_USER:-postgres}
