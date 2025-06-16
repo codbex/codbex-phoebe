@@ -11,13 +11,17 @@ Web IDE for [Apache Airflow](https://airflow.apache.org/) workflows development.
 * [Phoebe by codbex](#phoebe-by-codbex)
     * [Description](#description)
     * [Run steps](#run-steps)
-        * [Start using Docker and released image](#start-using-docker-and-released-image)
-            * [Start PostgreSQL](#start-postgresql)
+        * [Start using Docker, SQLite and released image](#start-using-docker-sqlite-and-released-image)
             * [Start Docker image](#start-docker-image)
+        * [Start using Docker, PostgreSQL and released image](#start-using-docker-postgresql-and-released-image)
+            * [Start PostgreSQL](#start-postgresql)
+            * [Start Docker image](#start-docker-image-1)
         * [Build the project jar](#build-the-project-jar)
         * [Start using Docker Compose and local sources](#start-using-docker-compose-and-local-sources)
         * [Java standalone application](#java-standalone-application)
-            * [Prerequisites](#prerequisites)
+            * [Start Airflow](#start-airflow)
+                * [Option 1 - using SQLite](#option-1---using-sqlite)
+                * [Option 2 - using PostgreSQL](#option-2---using-postgresql)
             * [Start the application](#start-the-application)
         * [Multi-platform Docker build](#multi-platform-docker-build)
             * [Spring profiles](#spring-profiles)
@@ -73,7 +77,24 @@ __Prerequisites:__
 
   ```
 
-### Start using Docker and released image
+### Start using Docker, SQLite and released image
+
+#### Start Docker image
+
+```shell
+docker rm -f "$PHOEBE_CONTAINER_NAME"
+
+docker pull "$PHOEBE_IMAGE"
+
+docker run --name "$PHOEBE_CONTAINER_NAME"  \
+    -p 80:80 \
+    $PHOEBE_IMAGE
+
+```
+
+__Note:__ SQLite is located at path `/opt/airflow/airflow.db`
+
+### Start using Docker, PostgreSQL and released image
 
 #### Start PostgreSQL
 
@@ -142,7 +163,31 @@ __Prerequisites:__ [Build the project jar](#build-the-project-jar)
 
 ### Java standalone application
 
-#### Prerequisites
+#### Start Airflow
+
+##### Option 1 - using SQLite
+
+- Start Airflow locally
+    ```shell
+    cd "$GIT_REPO_FOLDER"
+    
+    docker rm -f airflow
+    
+    docker run --name airflow  \
+       -p 8080:8080 \
+       -v "$AIRFLOW_WORK_DIR/dags:/opt/airflow/dags" \
+       -v "$AIRFLOW_WORK_DIR/logs:/opt/airflow/logs" \
+       -v "$AIRFLOW_WORK_DIR/config:/opt/airflow/config" \
+       -e AIRFLOW__CORE__LOAD_EXAMPLES=False \
+       -e _AIRFLOW_DB_MIGRATE=true \
+       -e AIRFLOW__SCHEDULER__DAG_DIR_LIST_INTERVAL=5 \
+       -e AIRFLOW__CORE__EXECUTOR=LocalExecutor \
+       -e AIRFLOW__CORE__SIMPLE_AUTH_MANAGER_ALL_ADMINS=True \
+       -d apache/airflow:3.0.2 standalone
+    ```
+- Ensure Airflow is started at [http://localhost:8080](http://localhost:8080)
+
+##### Option 2 - using PostgreSQL
 
 - [Start PostgreSQL](#start-postgresql)
 
@@ -163,9 +208,8 @@ __Prerequisites:__ [Build the project jar](#build-the-project-jar)
        -e AIRFLOW__CORE__EXECUTOR=LocalExecutor \
        -e AIRFLOW__CORE__SIMPLE_AUTH_MANAGER_ALL_ADMINS=True \
        -e AIRFLOW__DATABASE__SQL_ALCHEMY_CONN="postgresql+psycopg2://$PHOEBE_AIRFLOW_POSTGRES_USER:$PHOEBE_AIRFLOW_POSTGRES_PASS@host.docker.internal:5432/$PHOEBE_AIRFLOW_POSTGRES_DB" \
-       -d apache/airflow:3.0.1 standalone
+       -d apache/airflow:3.0.2 standalone
     ```
-
 - Ensure Airflow is started at [http://localhost:8080](http://localhost:8080)
 
 #### Start the application
@@ -292,12 +336,15 @@ The following configurations are available:
 |------------------------------|----------------------------------------------------------|-------------------------|
 | PHOEBE_AIRFLOW_URL           | The URL of the Airflow URL                               | `http://localhost:8080` |
 | PHOEBE_AIRFLOW_WORK_DIR      | Airflow working directory                                | `/opt/airflow`          |
-| PHOEBE_AIRFLOW_POSTGRES_USER | Docker config for Airflow PostgreSQL user                | `postgres`              |
-| PHOEBE_AIRFLOW_POSTGRES_PASS | Docker config for Airflow PostgreSQL password            | `postgres`              |
-| PHOEBE_AIRFLOW_POSTGRES_DB   | Docker config for Airflow PostgreSQL DB name             | `postgres`              |
-| PHOEBE_AIRFLOW_POSTGRES_HOST | Docker config for Airflow PostgreSQL host                | `postgres`              |
+| PHOEBE_AIRFLOW_POSTGRES_USER | Docker config for Airflow PostgreSQL user                | no default value        |
+| PHOEBE_AIRFLOW_POSTGRES_PASS | Docker config for Airflow PostgreSQL password            | no default value        |
+| PHOEBE_AIRFLOW_POSTGRES_DB   | Docker config for Airflow PostgreSQL DB name             | no default value        |
+| PHOEBE_AIRFLOW_POSTGRES_HOST | Docker config for Airflow PostgreSQL host                | no default value        |
 | DIRIGIBLE_BASIC_USERNAME     | Phoebe admin username. The value must be Base64 encoded. | `YWRtaW4=`              |
 | DIRIGIBLE_BASIC_PASSWORD     | Phoebe admin password. The value must be Base64 encoded. | `YWRtaW4=`              |
+
+__Note__: `PHOEBE_AIRFLOW_POSTGRES_USER`, `PHOEBE_AIRFLOW_POSTGRES_PASS`, `PHOEBE_AIRFLOW_POSTGRES_DB` and
+`PHOEBE_AIRFLOW_POSTGRES_HOST` are optional. If one of them is not provided, SQLite will be used for Airflow DB.
 
 Depending on the use case these configurations could be set in different ways.
 

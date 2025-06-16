@@ -54,10 +54,6 @@ EXPOSE 80
 COPY ./start.sh /opt/airflow/codbex/start.sh
 
 # Phoebe env variables
-ENV PHOEBE_AIRFLOW_POSTGRES_USER="postgres"
-ENV PHOEBE_AIRFLOW_POSTGRES_PASS="postgres"
-ENV PHOEBE_AIRFLOW_POSTGRES_HOST="postgres"
-ENV PHOEBE_AIRFLOW_POSTGRES_DB="postgres"
 ENV PHOEBE_AIRFLOW_WORK_DIR="/opt/airflow"
 
 # Airflow env variables
