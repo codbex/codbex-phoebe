@@ -336,12 +336,15 @@ The following configurations are available:
 |------------------------------|----------------------------------------------------------|-------------------------|
 | PHOEBE_AIRFLOW_URL           | The URL of the Airflow URL                               | `http://localhost:8080` |
 | PHOEBE_AIRFLOW_WORK_DIR      | Airflow working directory                                | `/opt/airflow`          |
-| PHOEBE_AIRFLOW_POSTGRES_USER | Docker config for Airflow PostgreSQL user                | `postgres`              |
-| PHOEBE_AIRFLOW_POSTGRES_PASS | Docker config for Airflow PostgreSQL password            | `postgres`              |
-| PHOEBE_AIRFLOW_POSTGRES_DB   | Docker config for Airflow PostgreSQL DB name             | `postgres`              |
-| PHOEBE_AIRFLOW_POSTGRES_HOST | Docker config for Airflow PostgreSQL host                | `postgres`              |
+| PHOEBE_AIRFLOW_POSTGRES_USER | Docker config for Airflow PostgreSQL user                | no default value        |
+| PHOEBE_AIRFLOW_POSTGRES_PASS | Docker config for Airflow PostgreSQL password            | no default value        |
+| PHOEBE_AIRFLOW_POSTGRES_DB   | Docker config for Airflow PostgreSQL DB name             | no default value        |
+| PHOEBE_AIRFLOW_POSTGRES_HOST | Docker config for Airflow PostgreSQL host                | no default value        |
 | DIRIGIBLE_BASIC_USERNAME     | Phoebe admin username. The value must be Base64 encoded. | `YWRtaW4=`              |
 | DIRIGIBLE_BASIC_PASSWORD     | Phoebe admin password. The value must be Base64 encoded. | `YWRtaW4=`              |
+
+__Note__: `PHOEBE_AIRFLOW_POSTGRES_USER`, `PHOEBE_AIRFLOW_POSTGRES_PASS`, `PHOEBE_AIRFLOW_POSTGRES_DB` and
+`PHOEBE_AIRFLOW_POSTGRES_HOST` are optional. If one of them is not provided, SQLite will be used for Airflow DB.
 
 Depending on the use case these configurations could be set in different ways.
 
