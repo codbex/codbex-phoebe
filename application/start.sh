@@ -1,10 +1,12 @@
 #!/bin/bash
 
-# Start Airflow in the background
-echo "Current user: $(whoami)"
-
 # construct airflow connection string which depends on env variables
-export AIRFLOW__DATABASE__SQL_ALCHEMY_CONN="postgresql+psycopg2://${PHOEBE_AIRFLOW_POSTGRES_USER}:${PHOEBE_AIRFLOW_POSTGRES_USER}@${PHOEBE_AIRFLOW_POSTGRES_HOST}/${PHOEBE_AIRFLOW_POSTGRES_DB}"
+if [[ -n "$PHOEBE_AIRFLOW_POSTGRES_USER" && -n "$PHOEBE_AIRFLOW_POSTGRES_PASS" && -n "$PHOEBE_AIRFLOW_POSTGRES_HOST" && -n "$PHOEBE_AIRFLOW_POSTGRES_DB" ]]; then
+  echo "Setting AIRFLOW__DATABASE__SQL_ALCHEMY_CONN to PostgreSQL"
+  export AIRFLOW__DATABASE__SQL_ALCHEMY_CONN="postgresql+psycopg2://${PHOEBE_AIRFLOW_POSTGRES_USER}:${PHOEBE_AIRFLOW_POSTGRES_PASS}@${PHOEBE_AIRFLOW_POSTGRES_HOST}/${PHOEBE_AIRFLOW_POSTGRES_DB}"
+else
+  echo "Skipping AIRFLOW__DATABASE__SQL_ALCHEMY_CONN since the required env variables are not provided"
+fi
 
 echo "Airflow version:"
 /entrypoint airflow version
