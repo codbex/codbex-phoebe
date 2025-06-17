@@ -12,7 +12,7 @@
     <description>codbex phoebe</description>
     <groupId>com.codbex.phoebe</groupId>
     <artifactId>codbex-phoebe-parent</artifactId>
-    <version>3.7.0</version>
+    <version>4.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <inceptionYear>2025</inceptionYear>
