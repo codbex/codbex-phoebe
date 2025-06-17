@@ -23,7 +23,7 @@ class ProxyIT extends PhoebeIntegrationTest {
     private static final String AIRFLOW_PROXY_PATH = "/services/airflow";
 
     static {
-        AppConfig.AIRFLOW_URL.setValues("https://api.ipify.org");
+        AppConfig.AIRFLOW_URL.setValue("https://api.ipify.org");
     }
 
     @Autowired

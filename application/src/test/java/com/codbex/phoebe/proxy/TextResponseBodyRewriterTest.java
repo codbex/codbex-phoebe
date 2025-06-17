@@ -50,7 +50,7 @@ class TextResponseBodyRewriterTest {
 
     @BeforeAll
     public static void setUp() {
-        AppConfig.AIRFLOW_URL.setValues("http://localhost:8080");
+        AppConfig.AIRFLOW_URL.setValue("http://localhost:8080");
     }
 
     @Test
