@@ -17,7 +17,7 @@ import org.junit.jupiter.api.Test;
 class AirflowPerspectiveIT extends PhoebeIntegrationTest {
 
     static {
-        AppConfig.AIRFLOW_URL.setValues("http://httpbin.org");
+        AppConfig.AIRFLOW_URL.setValue("http://httpbin.org");
     }
 
     @Test
