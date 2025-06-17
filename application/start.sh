@@ -14,6 +14,9 @@ echo "Airflow version:"
 echo "Starting Airflow..."
 /entrypoint airflow standalone &
 
+# Explicitly create the target dir
+mkdir -p /opt/airflow/codbex/target
+
 # Start the Java application
 cd /opt/airflow/codbex
 echo "Starting java application..."
