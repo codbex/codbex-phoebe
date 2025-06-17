@@ -19,9 +19,6 @@ COPY ./ttyd_linux.x86_64_1.7.7 /usr/local/bin/ttyd
 # Grant execute permissions
 RUN chmod +x /usr/local/bin/ttyd
 
-# Change ownership to airflow user
-RUN chown airflow:root /usr/local/bin/ttyd
-
 # Define the correct Java package based on platform
 ARG TARGETPLATFORM
 RUN if [ "$TARGETPLATFORM" = "linux/amd64" ]; then \
@@ -40,12 +37,7 @@ RUN if [ "$TARGETPLATFORM" = "linux/amd64" ]; then \
 ENV JAVA_HOME=/usr/lib/jvm/java-21-amazon-corretto
 ENV PATH=$JAVA_HOME/bin:$PATH
 
-RUN mkdir -p /opt/airflow/codbex && \
-    chown -R airflow /opt/airflow/codbex
-
-# Switch back to the airflow user for running the application
-USER airflow
-
+RUN mkdir -p /opt/airflow/codbex
 # Copy your Spring Boot application JAR into the container
 COPY ./target/codbex-phoebe-[0-9]*.jar /opt/airflow/codbex/codbex-phoebe.jar
 
