@@ -13,6 +13,7 @@ RUN npm install -g esbuild
 RUN npm install -g typescript
 
 # Copy ttyd binary
+# downloaded from https://github.com/tsl0922/ttyd/releases/tag/1.7.7
 COPY ./ttyd_linux.x86_64_1.7.7 /usr/local/bin/ttyd
 
 # Grant execute permissions
