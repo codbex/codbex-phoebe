@@ -28,7 +28,7 @@ import static org.springframework.web.servlet.function.RequestPredicates.path;
 public class AirflowProxyConfig {
 
     // the path is used in file
-    // components/ide/ide-ui-airflow/src/main/resources/META-INF/dirigible/ide-airflow/airflow.html
+    // components/ui/perspective-airflow/src/main/resources/META-INF/dirigible/perspective-airflow/airflow.html
     static final String RELATIVE_BASE_PATH = "services/airflow";
     static final String ABSOLUTE_BASE_PATH = "/" + RELATIVE_BASE_PATH;
     static final String BASE_PATH_PATTERN = ABSOLUTE_BASE_PATH + "/**";

@@ -8,7 +8,7 @@
  * SPDX-FileCopyrightText: 2022 codbex or an codbex affiliate company and contributors
  * SPDX-License-Identifier: EPL-2.0
  */
-package com.codbex.phoebe.integration.tests;
+package com.codbex.phoebe.ui.tests;
 
 import com.codbex.phoebe.cfg.AppConfig;
 import org.eclipse.dirigible.tests.framework.browser.HtmlElementType;
@@ -17,7 +17,7 @@ import org.junit.jupiter.api.Test;
 class AirflowPerspectiveIT extends PhoebeIntegrationTest {
 
     static {
-        AppConfig.AIRFLOW_URL.setValue("http://httpbin.org");
+        AppConfig.AIRFLOW_URL.setValues("http://httpbin.org");
     }
 
     @Test

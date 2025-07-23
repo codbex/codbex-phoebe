@@ -5,7 +5,7 @@
     <parent>
         <groupId>com.codbex.platform</groupId>
         <artifactId>codbex-platform-parent</artifactId>
-        <version>11.67.0</version>
+        <version>12.2.0</version>
     </parent>
 
     <name>codbex - phoebe - parent</name>
@@ -59,7 +59,6 @@
     <modules>
         <module>application</module>
         <module>branding</module>
-        <module>welcome</module>
         <module>components</module>
         <module>integration-tests</module>
     </modules>
@@ -170,7 +169,7 @@
             </dependency>
             <dependency>
                 <groupId>com.codbex.phoebe</groupId>
-                <artifactId>codbex-phoebe-welcome</artifactId>
+                <artifactId>codbex-phoebe-components-ui-welcome</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
@@ -181,6 +180,11 @@
             <dependency>
                 <groupId>com.codbex.phoebe</groupId>
                 <artifactId>codbex-phoebe-components-ide-ui-phoebe</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.codbex.phoebe</groupId>
+                <artifactId>codbex-phoebe-components-ui-menu-help</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
