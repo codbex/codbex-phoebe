@@ -138,6 +138,12 @@
         <dependency>
             <groupId>org.eclipse.dirigible</groupId>
             <artifactId>dirigible-components-group-ui</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.eclipse.dirigible</groupId>
+                    <artifactId>dirigible-components-ui-menu-help</artifactId>
+                </exclusion>
+            </exclusions>
             <type>pom</type>
         </dependency>
 
