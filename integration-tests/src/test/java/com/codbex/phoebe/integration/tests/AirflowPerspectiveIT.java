@@ -23,7 +23,7 @@ class AirflowPerspectiveIT extends PhoebeIntegrationTest {
     @Test
     void testPerspective() {
         // expected to open https://httpbin.org
-        ide.openPath("/services/web/ide-airflow/index.html");
+        ide.openPath("/services/web/perspective-airflow/index.html");
 
         browser.assertElementExistsByTypeAndContainsText(HtmlElementType.HEADER2, "httpbin.org");
     }

@@ -15,7 +15,9 @@
 
     <modules>
         <module>templates/template-airflow-starter</module>
-        <module>ide/ide-ui-airflow</module>
+        <module>ui/perspective-airflow</module>
+        <module>ui/view-welcome</module>
+        <module>ui/menu-help</module>
     </modules>
 
 </project>

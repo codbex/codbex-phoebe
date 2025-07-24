@@ -12,10 +12,10 @@
 const viewData = {
 	id: 'airflow',
 	label: 'Airflow',
-	path: '/services/web/ide-airflow/index.html',
+	path: '/services/web/perspective-airflow/index.html',
 	lazyLoad: true,
 	autoFocusTab: false,
-	icon: '/services/web/ide-airflow/images/airflow.svg',
+	icon: '/services/web/perspective-airflow/images/airflow.svg',
 	order: 110,
 };
 if (typeof exports !== 'undefined') {

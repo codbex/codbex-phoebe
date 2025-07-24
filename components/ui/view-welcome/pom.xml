@@ -5,13 +5,13 @@
 
     <parent>
         <groupId>com.codbex.phoebe</groupId>
-        <artifactId>codbex-phoebe-parent</artifactId>
+        <artifactId>codbex-phoebe-components-parent</artifactId>
         <version>4.0.0-SNAPSHOT</version>
-        <relativePath>../pom.xml</relativePath>
+        <relativePath>../../pom.xml</relativePath>
     </parent>
 
     <name>codbex - phoebe - welcome</name>
-    <artifactId>codbex-phoebe-welcome</artifactId>
+    <artifactId>codbex-phoebe-components-ui-welcome</artifactId>
     <packaging>jar</packaging>
 
 </project>
