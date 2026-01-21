@@ -5,7 +5,7 @@
     <parent>
         <groupId>com.codbex.phoebe</groupId>
         <artifactId>codbex-phoebe-components-parent</artifactId>
-        <version>4.0.0-SNAPSHOT</version>
+        <version>3.24.0</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
 
