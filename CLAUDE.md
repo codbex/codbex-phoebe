@@ -4,14 +4,12 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-Phoebe is a **Web IDE for Apache Airflow workflow development** — the data-centric workflow
-platform in the [codbex product family](https://www.codbex.com/products/) (alongside Atlas,
-Helios, Hades, Oceanus, Hyperion, Iapetus, Rhea, Kronos). Like its siblings, it is a
-customizable product built on the **codbex platform / Eclipse Dirigible** (via the
-`com.codbex.platform:codbex-platform-parent` parent POM); Phoebe's distinguishing
-contribution is the Apache Airflow integration. It is a Spring Boot application: at runtime
-the Java app and an Apache Airflow instance run side by side (in the same Docker container in
-production), and Phoebe embeds Airflow's web UI by reverse-proxying to it.
+Phoebe is **the data-centric workflow platform based on Apache Airflow**
+([product page](https://www.codbex.com/products/)) — a customizable Web IDE for Apache
+Airflow workflow development built on the **codbex platform / Eclipse Dirigible** (via the
+`com.codbex.platform:codbex-platform-parent` parent POM). It is a Spring Boot application: at
+runtime the Java app and an Apache Airflow instance run side by side (in the same Docker
+container in production), and Phoebe embeds Airflow's web UI by reverse-proxying to it.
 
 ## Build & test commands
 
