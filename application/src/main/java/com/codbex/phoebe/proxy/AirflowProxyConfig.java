@@ -50,14 +50,16 @@ public class AirflowProxyConfig {
         LOGGER.info("Configuring Airflow proxy for path [{}] to URL [{}]", BASE_PATH_PATTERN, airflowUrl);
 
         return GatewayRouterFunctions.route("airflow-proxy-route")
-                                     .GET(path(AirflowProxyConfig.BASE_PATH_PATTERN), http(airflowUrl))
-                                     .POST(path(AirflowProxyConfig.BASE_PATH_PATTERN), http(airflowUrl))
-                                     .PUT(path(AirflowProxyConfig.BASE_PATH_PATTERN), http(airflowUrl))
-                                     .PATCH(path(AirflowProxyConfig.BASE_PATH_PATTERN), http(airflowUrl))
-                                     .DELETE(path(AirflowProxyConfig.BASE_PATH_PATTERN), http(airflowUrl))
-                                     .HEAD(path(AirflowProxyConfig.BASE_PATH_PATTERN), http(airflowUrl))
-                                     .OPTIONS(path(AirflowProxyConfig.BASE_PATH_PATTERN), http(airflowUrl))
+                                     .GET(path(AirflowProxyConfig.BASE_PATH_PATTERN), http())
+                                     .POST(path(AirflowProxyConfig.BASE_PATH_PATTERN), http())
+                                     .PUT(path(AirflowProxyConfig.BASE_PATH_PATTERN), http())
+                                     .PATCH(path(AirflowProxyConfig.BASE_PATH_PATTERN), http())
+                                     .DELETE(path(AirflowProxyConfig.BASE_PATH_PATTERN), http())
+                                     .HEAD(path(AirflowProxyConfig.BASE_PATH_PATTERN), http())
+                                     .OPTIONS(path(AirflowProxyConfig.BASE_PATH_PATTERN), http())
 
+                                     // gateway server webmvc 5.0 removed http(uri); the target is now set via the uri() before-filter
+                                     .before(BeforeFilterFunctions.uri(airflowUrl))
                                      .before(BeforeFilterFunctions.rewritePath(AirflowProxyConfig.ABSOLUTE_BASE_PATH + "(.*)", "$1"))
 
                                      .after(AfterFilterFunctions.rewriteLocationResponseHeader(
