@@ -111,7 +111,9 @@ class TextResponseBodyRewriter implements BodyFilterFunctions.RewriteResponseFun
 
             String replacement = newAirflowUrl + (extraPath != null ? "/" + extraPath : "");
 
-            matcher.appendReplacement(result, replacement);
+            // quoteReplacement escapes any '$' or '\' in the matched path (common in minified JS bundles)
+            // so they are not interpreted as group references by appendReplacement
+            matcher.appendReplacement(result, Matcher.quoteReplacement(replacement));
         }
         matcher.appendTail(result);
 
@@ -131,7 +133,7 @@ class TextResponseBodyRewriter implements BodyFilterFunctions.RewriteResponseFun
             String updatedPath = "/services/airflow" + decodedPath;
             String reEncodedPath = URLEncoder.encode(updatedPath, StandardCharsets.UTF_8);
 
-            matcher.appendReplacement(result, paramName + reEncodedPath);
+            matcher.appendReplacement(result, Matcher.quoteReplacement(paramName + reEncodedPath));
         }
         matcher.appendTail(result);
 

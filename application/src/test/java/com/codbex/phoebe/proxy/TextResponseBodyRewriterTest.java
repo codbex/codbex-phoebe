@@ -129,6 +129,21 @@ class TextResponseBodyRewriterTest {
     }
 
     @Test
+    void rewriteBody_shouldNotFail_whenAirflowUrlIsFollowedByDollarOrBackslash() {
+        // minified JS bundles (e.g. Airflow's static assets) may contain '$' or '\' right after the
+        // Airflow URL; these are special chars for Matcher.appendReplacement and previously caused
+        // an IllegalArgumentException: Illegal group reference -> HTTP 500
+        byte[] body = "var a=\"http://localhost:8080/path/$1\\foo\";".getBytes(StandardCharsets.UTF_8);
+        String expectedBody = "var a=\"http://localhost:8080/services/airflow/path/$1\\foo\";";
+
+        when(request.uri()).thenReturn(URI.create("http://localhost:8080/services/airflow"));
+
+        String result = rewriter.rewriteBody(request, body);
+
+        assertEquals(expectedBody, result);
+    }
+
+    @Test
     void rewriteBody_shouldNotReplaceAirflowUrl_whenHostHeaderIsMissing() {
         byte[] body = "<html><body>http://old-airflow-url</body></html>".getBytes(StandardCharsets.UTF_8);
         String expectedBody = "<html><body>http://old-airflow-url</body></html>";
