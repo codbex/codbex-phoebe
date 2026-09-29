@@ -15,9 +15,12 @@ echo "Starting Airflow..."
 /entrypoint airflow standalone &
 
 # Start the Java application
+# PropertiesLauncher (not -jar / JarLauncher) so AOT-compiled module jars dropped into /modules
+# join the classpath (eclipse-dirigible/dirigible#6592). A missing or empty /modules is ignored.
 cd /opt/airflow/codbex
 echo "Starting java application..."
 java --add-opens=java.base/java.lang=ALL-UNNAMED \
      --add-opens=java.base/java.lang.reflect=ALL-UNNAMED \
      --add-opens=java.base/java.nio=ALL-UNNAMED \
-     -jar ./codbex-phoebe.jar
+     -cp ./codbex-phoebe.jar -Dloader.path=/modules \
+     org.springframework.boot.loader.launch.PropertiesLauncher
