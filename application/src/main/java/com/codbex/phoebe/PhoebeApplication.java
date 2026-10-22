@@ -22,7 +22,9 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 @EnableJpaAuditing
 @EnableJpaRepositories
-@SpringBootApplication(scanBasePackages = {"com.codbex.phoebe", "org.eclipse.dirigible.components"},
+@SpringBootApplication(
+        scanBasePackages = {"com.codbex.phoebe", "org.eclipse.dirigible.components", "org.eclipse.dirigible.engine",
+                "org.eclipse.dirigible.commons"},
         exclude = {DataSourceAutoConfiguration.class, DataSourceTransactionManagerAutoConfiguration.class,
                 HibernateJpaAutoConfiguration.class, JdbcTemplateAutoConfiguration.class})
 @EnableScheduling
