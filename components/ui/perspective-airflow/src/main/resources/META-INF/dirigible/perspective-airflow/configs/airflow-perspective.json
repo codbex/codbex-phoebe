@@ -1,0 +1,9 @@
+{
+    "id": "airflow",
+    "label": "Airflow",
+    "path": "/services/web/perspective-airflow/index.html",
+    "lazyLoad": true,
+    "autoFocusTab": false,
+    "icon": "/services/web/perspective-airflow/images/airflow.svg",
+    "order": 110
+}
