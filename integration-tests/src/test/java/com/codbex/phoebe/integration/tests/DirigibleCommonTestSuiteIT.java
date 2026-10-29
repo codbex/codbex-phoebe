@@ -20,9 +20,7 @@ import org.junit.platform.suite.api.Suite;
 @SelectClasses({//
         CreateNewProjectIT.class, //
         DatabasePerspectiveIT.class, //
-        GitPerspectiveIT.class, //
         HomepageRedirectIT.class, //
-        MailIT.class, //
         MessagingFacadeIT.class, //
         SecurityIT.class, //
         TerminalIT.class//

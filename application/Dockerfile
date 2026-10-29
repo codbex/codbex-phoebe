@@ -4,13 +4,7 @@ USER root
 
 RUN apt-get update && \
     apt-get install -y git && \
-    apt-get install -y wget && \
-    apt-get install -y nodejs && \
-    apt-get install -y npm
-
-# Install global npm packages
-RUN npm install -g esbuild
-RUN npm install -g typescript
+    apt-get install -y wget
 
 # Copy ttyd binary
 # downloaded from https://github.com/tsl0922/ttyd/releases/tag/1.7.7

@@ -54,7 +54,7 @@ Multi-module Maven build. Modules: `application`, `branding`, `components`,
   `PHOEBE_AIRFLOW_URL` (default `http://localhost:8080`) and `PHOEBE_AIRFLOW_WORK_DIR`
   (default `/opt/airflow`). Use this enum to read/set config, not raw env access.
 - `Dockerfile` + `start.sh` — image is based on `apache/airflow:3.0.2`, adds Java 21
-  (Corretto), node/esbuild/typescript (for Dirigible's TS compilation), and `ttyd` (terminal
+  (Corretto) and `ttyd` (terminal
   perspective). `start.sh` launches Airflow `standalone` and the Java jar together;
   PostgreSQL is used when the `PHOEBE_AIRFLOW_POSTGRES_*` env vars are all set, otherwise
   Airflow falls back to SQLite.
@@ -66,7 +66,8 @@ that register against extension points (e.g. `platform-perspectives`).
 - `ui/perspective-airflow` — the embedded Airflow perspective (iframes the proxied UI).
 - `ui/view-welcome`, `ui/menu-help` — welcome view and help menu.
 - `templates/template-airflow-starter` — the "Apache Airflow Starter" project template
-  (`template.js` defines generated DAG/config files); used by the IDE to scaffold new
+  (`template.json` defines generated DAG/config files; its `.extension` still names the
+  template id `template.js`); used by the IDE to scaffold new
   Airflow projects.
 
 ### `branding/` — Dirigible branding overrides (product name, logos, etc.)
