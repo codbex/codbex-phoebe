@@ -1,0 +1,8 @@
+{
+    "id": "welcome",
+    "label": "Welcome",
+    "lazyLoad": true,
+    "autoFocusTab": true,
+    "region": "center",
+    "path": "/services/web/view-welcome/welcome.html"
+}

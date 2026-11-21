@@ -1,5 +1,5 @@
 {
-    "module":"perspective-airflow/configs/airflow-perspective.js",
+    "module":"perspective-airflow/configs/airflow-perspective.json",
     "extensionPoint":"platform-perspectives",
     "description":"Airflow Perspective"
 }
